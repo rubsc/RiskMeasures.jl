@@ -78,11 +78,7 @@ function EVaR(beta,states, prob)
 			tOpt = sqrt.(2 *beta/var)
 			EV = Model(with_optimizer(Ipopt.Optimizer, print_level=0))
 			function objective1(t)
-				if t==0
-					return(10000000000)
-				else
-					return( (beta.+ log(dot(prob,exp.(t.*states))))/t)
-				end
+				return( (beta.+ log(dot(prob,exp.(t.*states))))/t)
 			end
 			register(EV, :objective1, 1, objective1, autodiff=true)
 
