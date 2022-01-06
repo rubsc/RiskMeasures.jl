@@ -8,6 +8,7 @@ using Test
     @test ontoSimplex([0.3 0.3 0.3 0.3]) == [0.25 0.25 0.25 0.25]
     @test ontoSimplex([-0.3 -0.3 0.3 0.3]) == [0.0 0.0 0.5 0.5]
     @test goldenSearch(x -> x^2, 1.0)[2] < 1E-16
+    @test goldenSearch(x -> x^2, -1.0)[2] < 1E-16
 end
 
 @testset "basic_RM.jl" begin
@@ -17,6 +18,7 @@ end
     @test Expectation(states,prob) == 0.2*1 + 0.4*2 + 0.2*3 + 0.2*4
 
     @test mSD(0.0,2,states,prob) == Expectation(states,prob)
+    @test mSD(0.0,2,[1 1], [0.0 0.0]) == 1
     @test mSD(1.0,2,states,prob) ≈ 3.16419 atol = 0.001
     @test mSD(1.0,2,states,prob) < mSD(1.0,3,states,prob)
 
@@ -33,7 +35,7 @@ end
     @test EVaR2(0.5,states, prob)[1] ≈ 3.413183 atol = 0.001
     @test EVaR2(0.5,[1 1], [0.0 0.0])[1] == 0 
     @test EVaR(0.0,states, prob)[1] == Expectation(states,prob)
-    @test EVaR2(0.5,states, prob)[1] ≈ 3.413183 atol = 0.001
+    @test EVaR(0.5,states, prob)[1] ≈ 3.413183 atol = 0.001
     @test EVaR(0.5,[1 1], [0.0 0.0])[1] == 0.0
     @test AVaR(states,prob, 0.0)[1] == Expectation(states,prob)
     @test AVaR(states,prob, 0.5)[1] ≈ CTE2(states,prob,0.5) atol = 0.0001
