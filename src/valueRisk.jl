@@ -63,7 +63,7 @@ end
 
 """
 function EVaR(beta,states, prob)
-	if prob == 0
+	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
 	dualZ = zeros(length(states))
