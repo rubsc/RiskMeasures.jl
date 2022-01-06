@@ -45,11 +45,11 @@ end
 
  
 
-function VaR(states,probs,alpha)
+function VaR(states,prob,alpha)
     # look for smallest x such that  P(-states <= x) >alpha , i.e.
-    ind = sortperm(states[1:length(states),1])
-    states = states[ind]; probs = probs[ind];
-    probs2 = probs
+    ind = sortperm(states[1:length(states)])
+    states = states[ind]; probs = prob[ind];
+    probs2 = prob
     for i=length(states):-1:2
         if(states[i] == states[i-1])
             probs2[i] = probs2[i] + probs2[i-1]
@@ -64,8 +64,8 @@ function VaR(states,probs,alpha)
 end
 
 
-function CTE2(states,probs,alpha)
-    tmp = VaR(states,probs,alpha)
-    tmp2 = tmp + 1/(1-alpha) * dot(probs, max.(states .- tmp,0))
+function CTE2(states,prob,alpha)
+    tmp = VaR(states,prob,alpha)
+    tmp2 = tmp + 1/(1-alpha) * dot(prob, max.(states .- tmp,0))
     return sum(tmp2)
 end
