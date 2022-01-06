@@ -7,4 +7,5 @@ using Test
 
     @test ontoSimplex([0.3 0.3 0.3 0.3]) == [0.25 0.25 0.25 0.25]
     @test ontoSimplex([-0.3 -0.3 0.3 0.3]) == [0.0 0.0 0.5 0.5]
+    @test goldenSearch(x -> x^2, 1.0)[2] < 1E-16
 end
