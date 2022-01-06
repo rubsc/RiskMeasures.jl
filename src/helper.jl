@@ -21,12 +21,13 @@ function ontoSimplex(x)
         end
         tmp = sum(x)
         n = length(x)
-        if tmp < 0
+        if tmp > 0
             x = x/tmp
         else
             #fehlt noch wird aber nicht benötigt
     
         end
+        return x
     end
 
     
