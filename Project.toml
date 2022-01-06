@@ -1,0 +1,13 @@
+name = "riskMeasures"
+uuid = "9c58476d-5dbb-4efd-a8c9-736f93577f6d"
+authors = ["Ruben Schlotter <ruben.schlotter@gmail.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1.6"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
