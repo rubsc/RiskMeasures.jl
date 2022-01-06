@@ -118,13 +118,21 @@ function AVaR(states,prob, alpha)
   #Now set up optimization problem using goldenSearch
     else
        tOpt = sqrt.(2 *alpha/var2)
-       function objective1(t)
-            states = max.(states .- t,0)
-             return( t+ 1/(1-alpha) * dot(prob,states) )
-        end
-        out = goldenSearch(objective1,tOpt)
-        tOpt = out[1]
-        ho = out[2]
+       EV = Model(with_optimizer(Ipopt.Optimizer, print_level=0))
+		function objective1(t)
+			if t==0
+				return(10000000000)
+			else
+				return( t + 1/(1-alpha) * dot(prob, max.(states .- t,0)) )
+			end
+		end
+		register(EV, :objective1, 1, objective1, autodiff=true)
+	    @variable(EV,t,start = tOpt)
+		@NLobjective(EV, Min, objective1(t) )
+
+		JuMP.optimize!(EV)
+		AVaR = JuMP.objective_value(EV)
+	    tOpt = JuMP.value(t)
     end
-    return(ho)
+    return(AVaR, tOpt)
 end
