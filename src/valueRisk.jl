@@ -130,3 +130,23 @@ function EVaR(beta,states, prob)
 	end
 	return(EVaR,tOpt,dualZ)
 end
+
+
+function AVaR(states,prob, alpha)
+    var2 = dot(prob, (states .- dot(prob,states)).^2);
+     #First trivial case
+    if alpha == 0.0
+        return(dot(prob, states))
+  #Now set up optimization problem using goldenSearch
+    else
+       tOpt = sqrt.(2 *alpha/var2)
+       function objective1(t)
+            states = max.(states .- t,0)
+             return( t+ 1/(1-alpha) * dot(prob,states) )
+        end
+        out = goldenSearch(objective1,tOpt)
+        tOpt = out[1]
+        ho = out[2]
+    end
+    return(ho)
+end

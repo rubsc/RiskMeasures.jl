@@ -38,3 +38,83 @@ function mSD(beta,p,states,prob)
 	end
 	return(mSD)
 end
+
+
+###################################
+
+
+ 
+
+function VaR(states,probs,alpha)
+
+    # look for smallest x such that  P(-states <= x) >alpha , i.e.
+
+   
+
+
+
+    #states = Tree0.state
+
+    #probs = Tree0.probability
+
+    ind = sortperm(states[1:length(states),1])
+
+
+
+    states = states[ind]; probs = probs[ind];
+
+    probs2 = probs
+
+
+
+    for i=length(states):-1:2
+
+                if(states[i] == states[i-1])
+
+                            probs2[i] = probs2[i] + probs2[i-1]
+
+                end
+
+
+
+    end
+
+
+
+    bla = unique(i -> states[i], length(states):-1:1)
+
+    probs3 = probs2[bla]
+
+    states2 = states[bla]
+
+
+
+    d = DiscreteNonParametric(states2, probs3)
+
+
+
+    return(quantile(d,alpha))
+
+
+
+end
+
+
+
+
+
+function CTE2(states,probs,alpha)
+
+
+
+    tmp = VaR(states,probs,alpha)
+
+
+
+    tmp2 = tmp + 1/(1-alpha) * dot(probs, max.(states .- tmp,0))
+
+return sum(tmp2)
+
+
+
+end
