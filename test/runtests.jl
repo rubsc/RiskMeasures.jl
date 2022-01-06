@@ -30,8 +30,9 @@ end
     states = [1 2 3 4]; prob = [0.2 0.4 0.2 0.2]
     
     @test EVaR2(0.0,states, prob)[1] == Expectation(states,prob)
-    @test EVaR2(0.5,states, prob)[1] ≈ 3.413 atol = 0.001
+    @test EVaR2(0.5,states, prob)[1] ≈ 3.413183 atol = 0.001
     @test EVaR(0.0,states, prob)[1] == Expectation(states,prob)
-    @test EVaR2(0.5,states, prob)[1] ≈ 3.413 atol = 0.001
+    @test EVaR2(0.5,states, prob)[1] ≈ 3.413183 atol = 0.001
     @test AVaR(states,prob, 0.0) == Expectation(states,prob)
+    #@test AVaR(states,prob, 0.5) ≈ CTE2(states,prob,0.5) atol = 0.001
 end
