@@ -20,5 +20,5 @@ end
     @test mSD(1.0,2,states,prob) ≈ 3.16419 atol = 0.001
     @test mSD(1.0,2,states,prob) < mSD(1.0,3,states,prob)
 
-    @test VaR(states,probs,0.0) == min(states)
+    @test VaR(states,prob,0.0) == minimum(states)
 end
