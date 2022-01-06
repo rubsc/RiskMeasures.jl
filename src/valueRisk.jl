@@ -2,28 +2,6 @@
 
 
 
-
-function CTE(v,p;rev=false)
-    # filter has the "or approximately equalt to quantile" because
-    # of floating point path might make the quantile slightly off from the right indexing 
-    # e.g. if values should capture <= q, where q should be 10 but is calculated to be 
-    # 9.99999...
-    if rev
-        q = StatsBase.quantile(v,1-p)
-        filter = (v .<= q) .| (v .≈ q) 
-    else
-        q = StatsBase.quantile(v,p)
-        filter = (v .>= q) .| (v .≈ q) 
-    end    
-
-    return sum(v[filter]) / sum(filter)
-
-end
-
-
-
-
-
 """ Solving the optimization problem associated with evaluating EVaR as well
 	as providing the dual variables
 

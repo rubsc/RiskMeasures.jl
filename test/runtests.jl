@@ -21,4 +21,17 @@ end
     @test mSD(1.0,2,states,prob) < mSD(1.0,3,states,prob)
 
     @test VaR(states,prob,0.0) == minimum(states)
+    @test CTE2(states,prob,0.0) == Expectation(states,prob)
+end
+
+
+@testset "valueRisk.jl" begin
+    # Write your tests here.
+    states = [1 2 3 4]; prob = [0.2 0.4 0.2 0.2]
+    
+    @test EVaR2(0.0,states, prob)[1] == Expectation(states,prob)
+    @test EVaR2(0.5,states, prob)[1] ≈ 3.413 atol = 0.001
+    @test EVaR(0.0,states, prob)[1] == Expectation(states,prob)
+    @test EVaR2(0.5,states, prob)[1] ≈ 3.413 atol = 0.001
+    @test AVaR(states,prob, 0.0) == Expectation(states,prob)
 end
