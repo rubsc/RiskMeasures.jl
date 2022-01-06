@@ -12,7 +12,8 @@ end
 
 @testset "basic_RM.jl" begin
     # Write your tests here.
-    @test Expectation([1 2 3 4],0) == mean([1 2 3 4])
+    @test Expectation([1 2 3 4],0) == sum([1 2 3 4])/4
+    @test Expectation([1 2 3 4],[0.2 0.4 0.2 0.2]) == 0.2*1 + 0.4*2 + 0.2*3 + 0.2*4
 
     @test ontoSimplex([0.3 0.3 0.3 0.3]) == [0.25 0.25 0.25 0.25]
     @test ontoSimplex([-0.3 -0.3 0.3 0.3]) == [0.0 0.0 0.5 0.5]
