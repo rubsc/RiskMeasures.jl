@@ -11,6 +11,6 @@ include("helper.jl")
 include("basic_RM.jl")
 include("valueRisk.jl")
 
-export CTE, EVaR, EVaR2, Expectatio, mSD, pnorm, ontoSimplex, goldenSearch
+export CTE, EVaR, EVaR2, Expectation, mSD, pnorm, ontoSimplex, goldenSearch
 
 end
