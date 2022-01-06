@@ -5,7 +5,7 @@ module riskMeasures
 
 using JuMP, LinearAlgebra, Ipopt
 
-export CTE, EVaR, EVaR2, Expectatio, mSD
+#export CTE, EVaR, EVaR2, Expectatio, mSD
 
 include("helper.jl")
 include("basic_RM.jl")
