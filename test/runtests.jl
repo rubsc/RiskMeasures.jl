@@ -41,3 +41,14 @@ end
     @test AVaR(states,prob, 0.0)[1] == Expectation(states,prob)
     @test AVaR(states,prob, 0.5)[1] ≈ CTE2(states,prob,0.5) atol = 0.0001
 end
+
+
+@testset "convexRM.jl" begin
+    # Write your tests here.
+    states = [1 2 3 4]; prob = [0.2 0.4 0.2 0.2]
+
+    
+    @test entropic(1.0,states, prob) ≈ 2.91430 atol = 0.001
+    @test entropic(0.5,[1 1], [0.0 0.0]) == 1.0
+    
+end
