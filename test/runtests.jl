@@ -50,5 +50,9 @@ end
     
     @test entropic(1.0,states, prob) ≈ 2.91430 atol = 0.001
     @test entropic(0.5,[1 1], [0.0 0.0]) == 1.0
+    @test entropic(0.0,[1 1], [0.0 0.0]) === nothing
+
+    @test meanVariance(-1.0,[1 1], [0.0 0.0]) === nothing
+    @test meanVariance(1.0,[1 1], [0.0 0.0]) == 1.0
     
 end
