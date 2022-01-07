@@ -120,11 +120,18 @@ end
     implied by states and prob vectors. 
 """
 function spectral(spec,states, prob)
+    # spec(x) = x^2
+    # spectral(spec, [1 2], [0.2 0.8])
     # check that prob is probability vector
     # create distribution --> quantile function
     # integrate product of quantile function and given spectral function if possible
+    d = DiscreteNonParametric(states, probs)
 
-	return(nothing)
+    
+    integral, err = quadgk(x -> quantile(d,x)*spec(x), 0, 1, rtol=1e-8)
+    #alpha_vec = 0
+    # integrate (quantile(d,alpha) * spec(alpha) d alpha
+	return(integral)
 end
 
 
