@@ -23,6 +23,9 @@ function spectral(spec,states, prob)
     # ToDo: check that prob is probability vector
 
     #ToDo: check that spec is a spectral function
+    if checkSpectral(spec) == false
+        return(nothing)
+    end
 
 
 

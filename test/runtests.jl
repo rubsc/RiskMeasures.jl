@@ -11,6 +11,7 @@ using Test
     @test goldenSearch(x -> x^2, -1.0)[2] < 1E-16
 
     @test checkSpectral(x -> x) == false
+    @test checkSpectral(x -> 2 .- 2 .*x) == false
     @test checkSpectral(x -> 0 .*x .+ 1.0) == true
 end
 
@@ -72,6 +73,8 @@ end
 
 
     @test spectral(x -> 1.0, [0, 1], [0.2, 0.8]) ≈ 0.8 atol = 0.0001
+    #@test spectral(x -> 2.0*x, [0, 1], [0.2, 0.8]) ≈ 0.8 atol = 0.0001
+
 
     @test GenCoherent(1.0,states, prob) === nothing
 
