@@ -20,12 +20,16 @@ function spectral(spec,states, prob)
     # spec(x) = x^2
     # spectral(spec, [1, 2], [0.2, 0.8])
 
-    # check that prob is probability vector
-    # create distribution --> quantile function
-    # integrate product of quantile function and given spectral function if possible
+    # ToDo: check that prob is probability vector
+
+    #ToDo: check that spec is a spectral function
+
+
+
+    # create distribution
     d = DiscreteNonParametric(states, prob)
 
-    
+    # approximate integral
     integral, err = quadgk(x -> quantile(d,x)*spec(x), 0, 1, rtol=1e-8)
 	return(integral)
 end

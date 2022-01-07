@@ -143,3 +143,16 @@ function goldenSearch(fun::Function,x1::Float64)
         return(x1,f1)
     end
     
+
+#################
+
+function checkSpectral(spec)
+    try
+        @test quadgk(x -> spec(x), 0, 1, rtol=1e-8) ≈ 1.0 atol = 0.00001
+        return(1)
+    catch
+        println("Cannot find the square root of negative numbers")
+    end
+
+
+end
