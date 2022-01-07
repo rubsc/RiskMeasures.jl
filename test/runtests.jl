@@ -59,5 +59,8 @@ end
     @test meanDeviation(1.0,2.0,[1 1], [0.0 0.0]) == 1.0
     @test meanDeviation(-1.0,0.5,[1 1], [0.0 0.0]) === nothing
     @test meanDeviation(1.0,0.5,[1 1], [0.0 0.0]) === nothing
+
+    @test meanSemiVariance(1.0, 0.0, [1 1], [0 0]) == 2.0
+    @test meanSemiVariance(-1.0, 0.0, [1 1], [0 0]) === nothing
     
 end
