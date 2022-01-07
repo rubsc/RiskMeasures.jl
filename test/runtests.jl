@@ -66,5 +66,11 @@ end
     @test meanSemiDevi(1.0, 0.0, 2.0, [1 1], [0 0]) == 2.0
     @test meanSemiDevi(-1.0, 0.0, 2.0, [1 1], [0 0]) === nothing
     @test meanSemiDevi(1.0, 0.0, -2.0, [1 1], [0 0]) === nothing
-    
+
+
+    @test spectral(1.0,states, prob) === nothing
+
+    @test GenCoherent(1.0,states, prob) === nothing
+
+    @test GenConvex(1.0,states, prob) === nothing
 end

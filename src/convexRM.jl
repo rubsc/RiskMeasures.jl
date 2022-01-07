@@ -124,5 +124,30 @@ function spectral(spec,states, prob)
     # create distribution --> quantile function
     # integrate product of quantile function and given spectral function if possible
 
+	return(nothing)
+end
+
+
+""" Coherent risk measure
+    Calculates a general coherent risk measure based on duality representations
+"""
+function GenCoherent(conds,states, prob)
+    # based on the dual representation a set of conditions can be set and
+    # using IpOpt + JuMP the risk measure can be considered. 
+    
+
+
+    return(nothing)
 	
+end
+
+
+""" Convex risk measure
+    Calculates a general convex risk measure based on duality representations 
+"""
+function GenConvex(conds,states, prob)
+    # based on the dual representation a set of conditions can be set and
+    # using IpOpt + JuMP the risk measure can be considered. 
+
+	return(nothing)
 end
