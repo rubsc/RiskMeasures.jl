@@ -83,6 +83,6 @@ function meanSemiVariance(c::Float64,target::Float64,states, prob)
 	end
 	
     tmp1 = dot(states,prob)
-    tmp2 = pnorm(2,prob, states .- target);
+    tmp2 = pnorm(2,prob, max.(states .- target,0));
 	return(tmp1 + c*tmp2) 
 end
