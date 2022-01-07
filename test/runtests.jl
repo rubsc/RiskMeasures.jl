@@ -54,5 +54,10 @@ end
 
     @test meanVariance(-1.0,[1 1], [0.0 0.0]) === nothing
     @test meanVariance(1.0,[1 1], [0.0 0.0]) == 1.0
+
+    @test meanDeviation(-1.0,2.0,[1 1], [0.0 0.0]) === nothing
+    @test meanDeviation(1.0,2.0,[1 1], [0.0 0.0]) == 1.0
+    @test meanDeviation(-1.0,0.5,[1 1], [0.0 0.0]) === nothing
+
     
 end

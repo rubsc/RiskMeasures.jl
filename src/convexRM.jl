@@ -44,3 +44,25 @@ function meanVariance(c::Float64,states, prob)
     tmp2 = dot(prob, (states .- tmp1).^2);
 	return(tmp1 + c*tmp2) 
 end
+
+
+
+""" Mean Deviation risk Measure
+
+"""
+function meanDeviation(c::Float64,p::Float64,states, prob)
+    if c<0
+        return(nothing)
+    end
+    if p<1.0
+        return(nothing)
+    end
+	if sum(prob) == 0
+		prob = ones(length(states))./ length(states)
+        # improve this with isprob and onto simplex?
+	end
+	
+    tmp1 = dot(states,prob)
+    tmp2 = pnorm(p,prob, states .- tmp1);
+	return(tmp1 + c*tmp2) 
+end
