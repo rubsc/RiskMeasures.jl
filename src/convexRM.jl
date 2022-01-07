@@ -1,113 +1,10 @@
-# convex risk measures and other similar objects
+# General abstract formulation of risk measures
+    # Spectral risk measures --> Done
+    # Coherent risk measures based on dual formulation --> Concept done
+    # Convex risk measures based on dual formulation    --> Concept done
+    # utility based risk measures --> build check for utility functions
 
 
-""" Entropic risk measure 
-	as providing the dual variables
-
-	t* log Ee^(Y/t)  for t>0
-
-
-"""
-function entropic(theta::Float64,states, prob)
-    if theta <= 0
-        return(nothing)
-    end
-	if sum(prob) == 0
-		prob = ones(length(states))./ length(states)
-        # improve this with isprob and onto simplex?
-	end
-	
-    w = states./theta
-    offset = maximum(w)
-    we = exp.(w .- offset)
-    s = dot(prob, we)
-    w = log(s) + offset
-    tmp = theta*w
-	
-	return(tmp) 
-end
-
-
-""" Mean Variance risk Measure
-
-"""
-function meanVariance(c::Float64,states, prob)
-    if c<0
-        return(nothing)
-    end
-	if sum(prob) == 0
-		prob = ones(length(states))./ length(states)
-        # improve this with isprob and onto simplex?
-	end
-	
-    tmp1 = dot(states,prob)
-    tmp2 = dot(prob, (states .- tmp1).^2);
-	return(tmp1 + c*tmp2) 
-end
-
-
-
-""" Mean Deviation risk Measure of order p
-
-"""
-function meanDeviation(c::Float64,p::Float64,states, prob)
-    if c<0
-        return(nothing)
-    end
-    if p<1.0
-        return(nothing)
-    end
-	if sum(prob) == 0
-		prob = ones(length(states))./ length(states)
-        # improve this with isprob and onto simplex?
-	end
-	
-    tmp1 = dot(states,prob)
-    tmp2 = pnorm(p,prob, states .- tmp1);
-	return(tmp1 + c*tmp2) 
-end
-
-
-
-
-""" Mean-upper-semivariance from a target
-
-"""
-function meanSemiVariance(c::Float64,target::Float64,states, prob)
-    if c<0
-        return(nothing)
-    end
-	if sum(prob) == 0
-		prob = ones(length(states))./ length(states)
-        # improve this with isprob and onto simplex?
-	end
-	
-    tmp1 = dot(states,prob)
-    tmp2 = pnorm(2,prob, max.(states .- target,0))^2;
-	return(tmp1 + c*tmp2) 
-end
-
-
-
-""" Mean-upper-semideviation of order p from a target
-
-"""
-function meanSemiDevi(c::Float64,target::Float64,p::Float64,states, prob)
-    if c<0
-        return(nothing)
-    end
-    if p<1.0
-        return(nothing)
-    end
-	if sum(prob) == 0
-		prob = ones(length(states))./ length(states)
-        # improve this with isprob and onto simplex?
-	end
-	
-    tmp1 = dot(states,prob)
-    tmp2 = pnorm(p,prob, max.(states .- target,0));
-	return(tmp1 + c*tmp2) 
-end
 
 
 
@@ -121,16 +18,15 @@ end
 """
 function spectral(spec,states, prob)
     # spec(x) = x^2
-    # spectral(spec, [1 2], [0.2 0.8])
+    # spectral(spec, [1, 2], [0.2, 0.8])
+
     # check that prob is probability vector
     # create distribution --> quantile function
     # integrate product of quantile function and given spectral function if possible
-    d = DiscreteNonParametric(states, probs)
+    d = DiscreteNonParametric(states, prob)
 
     
     integral, err = quadgk(x -> quantile(d,x)*spec(x), 0, 1, rtol=1e-8)
-    #alpha_vec = 0
-    # integrate (quantile(d,alpha) * spec(alpha) d alpha
 	return(integral)
 end
 
@@ -141,7 +37,26 @@ end
 function GenCoherent(conds,states, prob)
     # based on the dual representation a set of conditions can be set and
     # using IpOpt + JuMP the risk measure can be considered. 
-    
+
+    # conds is nx2 matrix. Each row is of the form function(x) <= b similar to:
+    #tmp2 = [ x-> x^2 , x->x,  x->x^3, x-> x^2]
+
+    #Zopt = ones(length(prob))
+	#EV = Model(with_optimizer(Ipopt.Optimizer, print_level=0))
+	#function objective_dual(Z)
+    #    tmp = dot(prob,Z)
+	#	return(tmp)
+	#end
+	#register(EV, :objective_dual, length(prob), objective_dual, autodiff=true)
+	
+    #@variable(EV,Z,start = Zopt)
+	#@constraint(EV, Z .>=0)
+    #@constraint(EV, dot(prob,Z)==1)
+	#@NLobjective(EV, Min, objective1(t) )
+
+	#JuMP.optimize!(EV)
+	#EVaR = JuMP.objective_value(EV)
+	#tOpt = JuMP.value(t)
 
 
     return(nothing)
