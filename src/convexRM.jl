@@ -47,7 +47,7 @@ end
 
 
 
-""" Mean Deviation risk Measure
+""" Mean Deviation risk Measure of order p
 
 """
 function meanDeviation(c::Float64,p::Float64,states, prob)
@@ -64,5 +64,25 @@ function meanDeviation(c::Float64,p::Float64,states, prob)
 	
     tmp1 = dot(states,prob)
     tmp2 = pnorm(p,prob, states .- tmp1);
+	return(tmp1 + c*tmp2) 
+end
+
+
+
+
+""" Mean-upper-semivariance from a target
+
+"""
+function meanSemiVariance(c::Float64,target::Float64,states, prob)
+    if c<0
+        return(nothing)
+    end
+	if sum(prob) == 0
+		prob = ones(length(states))./ length(states)
+        # improve this with isprob and onto simplex?
+	end
+	
+    tmp1 = dot(states,prob)
+    tmp2 = pnorm(2,prob, states .- target);
 	return(tmp1 + c*tmp2) 
 end
