@@ -83,6 +83,28 @@ function meanSemiVariance(c::Float64,target::Float64,states, prob)
 	end
 	
     tmp1 = dot(states,prob)
-    tmp2 = pnorm(2,prob, max.(states .- target,0));
+    tmp2 = pnorm(2,prob, max.(states .- target,0))^2;
+	return(tmp1 + c*tmp2) 
+end
+
+
+
+""" Mean-upper-semideviation from a target
+
+"""
+function meanSemiDevi(c::Float64,target::Float64,p::Float64,states, prob)
+    if c<0
+        return(nothing)
+    end
+    if p<1.0
+        return(nothing)
+    end
+	if sum(prob) == 0
+		prob = ones(length(states))./ length(states)
+        # improve this with isprob and onto simplex?
+	end
+	
+    tmp1 = dot(states,prob)
+    tmp2 = pnorm(p,prob, max.(states .- target,0));
 	return(tmp1 + c*tmp2) 
 end
