@@ -33,7 +33,7 @@ end
 """
 function meanVariance(c::Float64,states, prob)
     if c<0
-        return(0)
+        return(nothing)
     end
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
