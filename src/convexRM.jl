@@ -89,7 +89,7 @@ end
 
 
 
-""" Mean-upper-semideviation from a target
+""" Mean-upper-semideviation of order p from a target
 
 """
 function meanSemiDevi(c::Float64,target::Float64,p::Float64,states, prob)
@@ -107,4 +107,22 @@ function meanSemiDevi(c::Float64,target::Float64,p::Float64,states, prob)
     tmp1 = dot(states,prob)
     tmp2 = pnorm(p,prob, max.(states .- target,0));
 	return(tmp1 + c*tmp2) 
+end
+
+
+
+
+""" Spectral risk measure
+    Calculates spectral risk measure by numerically integrating product
+    of quantile function and given spectral function. 
+
+    The quantile function is the quantile function for the discrete distribution
+    implied by states and prob vectors. 
+"""
+function spectral(spec,states, prob)
+    # check that prob is probability vector
+    # create distribution --> quantile function
+    # integrate product of quantile function and given spectral function if possible
+
+	
 end
