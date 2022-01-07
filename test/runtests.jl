@@ -72,6 +72,7 @@ end
     @test meanSemiDevi(1.0, 0.0, -2.0, [1 1], [0 0]) === nothing
 
     @test spectral(x -> 2.0*x, [0, 1], [0.2, 0.8]) ≈ 0.96 atol = 0.0001
+    @test spectral(x -> x, [0, 1], [0.2, 0.8]) === nothing
 
 
     @test GenCoherent(1.0,states, prob) === nothing
