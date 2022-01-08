@@ -75,7 +75,7 @@ end
     @test spectral(x -> x, [0, 1], [0.2, 0.8]) === nothing
 
 
-    @test GenCoherent(1.0,states, prob) === nothing
+    #@test GenCoherent(1.0,states, prob) === nothing
 
     @test GenConvex(1.0,states, prob) === nothing
 end

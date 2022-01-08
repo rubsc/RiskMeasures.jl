@@ -66,7 +66,7 @@ function GenCoherent(conds,states, prob)
 	
     @variable(EV,Z[i=1:n],start = Zopt[i])
 	@constraint(EV, Z .>=0)
-    @constraint(EV, conds(Z) <= 0) 
+    @NLconstraint(EV, conds(Z) <= 0) 
     @constraint(EV, dot(prob,Z)==1)
 	@NLobjective(EV, Min, objective_dual(t) )
 
