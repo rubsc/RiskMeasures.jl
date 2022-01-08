@@ -40,33 +40,42 @@ end
 
 """ Coherent risk measure
     Calculates a general coherent risk measure based on duality representations
+
+    for coherent risk measures the conditions E(Z) = 1 and Z ≥ 0 are enforced.
+    conds needs to be a real valued function F such that F(Z) ≤ 0.
+    To obtain a coherent risk measure F should be positively homegeneous.
+    
+    
 """
+
+# For testing : 
+# states = [1 2 3]; prob = [0.3 0.4 0.3]
+# conds(Z) = pnorm(2,Z,prob) - 2
 function GenCoherent(conds,states, prob)
     # based on the dual representation a set of conditions can be set and
     # using IpOpt + JuMP the risk measure can be considered. 
 
-    # conds is nx2 matrix. Each row is of the form function(x) <= b similar to:
-    #tmp2 = [ x-> x^2 , x->x,  x->x^3, x-> x^2]
-
-    #Zopt = ones(length(prob))
-	#EV = Model(with_optimizer(Ipopt.Optimizer, print_level=0))
-	#function objective_dual(Z)
-    #    tmp = dot(prob,Z)
-	#	return(tmp)
-	#end
-	#register(EV, :objective_dual, length(prob), objective_dual, autodiff=true)
+    n = length(prob)
+    Zopt = ones(n)
+	EV = Model(with_optimizer(Ipopt.Optimizer, print_level=0))
+	function objective_dual(Z)
+        tmp = dot(prob,Z)
+		return(tmp)
+	end
+	register(EV, :objective_dual, length(prob), objective_dual, autodiff=true)
 	
-    #@variable(EV,Z,start = Zopt)
-	#@constraint(EV, Z .>=0)
-    #@constraint(EV, dot(prob,Z)==1)
-	#@NLobjective(EV, Min, objective1(t) )
+    @variable(EV,Z[i=1:n],start = Zopt[i])
+	@constraint(EV, Z .>=0)
+    @constraint(EV, conds(Z) <= 0) 
+    @constraint(EV, dot(prob,Z)==1)
+	@NLobjective(EV, Min, objective_dual(t) )
 
-	#JuMP.optimize!(EV)
-	#EVaR = JuMP.objective_value(EV)
-	#tOpt = JuMP.value(t)
+	JuMP.optimize!(EV)
+	EVaR = JuMP.objective_value(EV)
+	tOpt = JuMP.value(t)
 
-
-    return(nothing)
+    return(EVaR,tOpt)
+    #return(nothing)
 	
 end
 
