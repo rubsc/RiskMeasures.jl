@@ -69,7 +69,7 @@ function GenCoherent(conds,states, prob)
         global Y = Z[i]
         global p = prob[i]
         bla = eval(o1)
-        o_tmp = add_expr(o_tmp, bla)
+        o_tmp = math_expr(:+,o_tmp, bla)
         println(o_tmp)
     end
     o_tmp = math_expr(o2,o_tmp)
