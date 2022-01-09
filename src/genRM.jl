@@ -49,16 +49,19 @@ end
 """
 
 # For testing : 
-# states = [1 2 3]; prob = [0.3 0.4 0.3]
-
-# INPUT NEEDS TO BE SOMETHING LIKE THIS:
-
+ #states = [1 2 3]; prob = [0.3 0.4 0.3]
+ #o1 = :( (Y)^2 *p)
+ #o2 = :(sqrt)
+ #oJoin = :+
+ #conds = [o1 oJoin o2]
 function GenCoherent(conds,states, prob)
     # based on the dual representation a set of conditions can be set and
     # using IpOpt + JuMP the risk measure can be considered. 
 
     n = length(prob); Zopt = ones(n);
-    o1 = conds[1]; o2 = conds[2]
+    o1 = conds[1]; o2 = conds[3]
+    oJoin = conds[2]
+
 
     EV = Model(with_optimizer(Ipopt.Optimizer, print_level=2))
     @variable(EV, 0 <= Z[1:n] )
@@ -69,10 +72,9 @@ function GenCoherent(conds,states, prob)
         global Y = Z[i]
         global p = prob[i]
         bla = eval(o1)
-        o_tmp = math_expr(:+,o_tmp, bla)
-        println(o_tmp)
+        o_tmp = math_expr(oJoin,o_tmp, bla)
     end
-    o_tmp = math_expr(o2,o_tmp)
+    o_tmp = math_expr(o2,o_tmp) # if no operation shall be carried out a unary plus o2 = :+ suffices
 
     add_NL_constraint(EV, :($(o_tmp) <= 2))
     @NLobjective(EV, Max, sum(states[i]*Z[i]*prob[i] for i in 1:n) )
