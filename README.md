@@ -18,7 +18,7 @@ The following risk measures are provided either explicitly or via a primal repre
 A general coherent risk measure $\rho$ on paired topological spaces can be expressed as
 
 <div style="text-align: center;">
-  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\rho(Y)=\sup\{\mathbb{E}YZ,Z\geq0,\mathbb{E}Z=1,F(Z)\leqC\}" title="coherentRiskMeasure" />
+  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\rho(Y)=\sup\{\mathbb{E}YZ,Z\geq0,\mathbb{E}Z=1,F(Z)\leq%20C\}" title="coherentRiskMeasure" />
 </div>
 
 where F(Z) is a positively homegenouos and convex function and c is a parameter. The user can specify F in the form G(sum(H(Z))) where F and H are straightforward expressions. Note that the sum operator must be included as + together with loops as JuMP will not work with expressions containing sums and similar functions. This limits the flexibility of the covered risk measures but still covers most typicall examples. 
