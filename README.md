@@ -17,17 +17,12 @@ The following risk measures are provided either explicitly or via a primal repre
 
 A general coherent risk measure $\rho$ on paired topological spaces can be expressed as
 
-<img 
-    style="display: block; 
-           margin-left: auto;
-           margin-right: auto;
-           width: 30%;"
-    src=src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" 
-    alt="Our logo">
-</img>
-
+<div style="text-align: center;">
+![alt text](https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} "Our logo")
+</div>
+<div style="text-align: center;">
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
-
+</div>
 
 
 
