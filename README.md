@@ -17,12 +17,9 @@ The following risk measures are provided either explicitly or via a primal repre
 
 A general coherent risk measure $\rho$ on paired topological spaces can be expressed as
 
-$$
-\begin{align}
-  \tag{1.1}
-  \rho(Y) = \frac{4}{3}\pi r^3
-\end{align}
-$$
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
+
+
 
 
 A generic implementation of the dual representation is also provided. However, the user has to construct the set explicitly himself. 
