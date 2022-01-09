@@ -161,3 +161,19 @@ function checkSpectral(spec)
     end
 
 end
+
+
+
+function add_expr(op1, op2)
+    expr = Expr(:call, :+, op1, op2)
+    return expr
+end
+
+function math_expr(op,op1)
+    expr = Expr(:call, op, op1)
+    return expr
+end
+function math_expr2(op,op1,op2)
+    expr = Expr(:call, op, op1, op2)
+    return expr
+end
