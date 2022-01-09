@@ -22,9 +22,9 @@ A general coherent risk measure $\rho$ on paired topological spaces can be expre
            margin-left: auto;
            margin-right: auto;
            width: 30%;"
-    src=src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}">
-
-     </img>
+    src=src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" 
+    alt="Our logo">
+</img>
 
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
 
