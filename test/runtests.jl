@@ -13,6 +13,8 @@ using Test
     @test checkSpectral(x -> x) == false
     @test checkSpectral(x -> 2 .- 2 .*x) == false
     @test checkSpectral(x -> 0 .*x .+ 1.0) == true
+
+    @test eval(math_expr2(:+,1,2)) == 3
 end
 
 @testset "basic_RM.jl" begin
