@@ -131,15 +131,15 @@ function goldenSearch(fun::Function,x1::Float64)
             x3= x1
             x1= tmp
         end
-        if (f3< f2)
-            tmp= f3
-            f3= f2
-            f2= tmp
-            tmp= x3
-            x3= x2
-            x2= tmp
+        #if (f3< f2)
+        #    tmp= f3
+        #    f3= f2
+        #    f2= tmp
+        #    tmp= x3
+        #    x3= x2
+        #    x2= tmp
     
-        end
+        #end
         return(x1,f1)
     end
     
