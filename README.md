@@ -31,7 +31,7 @@ Note that the class of spectral risk measures is equivalent with the class of di
 Spectral risk measures operate on quantile functions which are distorted by an increasing density. 
 Distortion risk measures distort the cumulative distribution functions. 
 
-For a brief example consider
+For a brief example of how to use a spectral risk measure consider
 ```julia
 states = [0 1]
 prob = [0.2 0.8]
@@ -40,7 +40,15 @@ spec(x) = 2.0*x
 
 spectral(spec, states, prob)
 ```
+The equivalent distortion risk measure would be:
+```julia
+states = [0 1]
+prob = [0.2 0.8]
 
+dist(x) = x^2 # derivative of dist == spec
+
+distortion(dist, states, prob)
+```
 
 ## General representation of coherent risk measures
 

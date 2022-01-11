@@ -14,7 +14,7 @@ include("genRM.jl")
 
 export CTE, EVaR, EVaR2, Expectation, mSD, pnorm, ontoSimplex, goldenSearch, VaR, CTE2, AVaR,
         entropic, meanVariance, meanDeviation, meanSemiVariance, meanSemiDevi,spectral, GenCoherent,
-        GenConvex, checkSpectral,
+        GenConvex, checkSpectral, distortion, 
         add_expr, math_expr
 
 end

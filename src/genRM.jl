@@ -38,6 +38,25 @@ function spectral(spec,states, prob)
 end
 
 
+
+""" Spectral risk measure
+    Calculates spectral risk measure by numerically integrating product
+    of quantile function and given spectral function. 
+
+    The quantile function is the quantile function for the discrete distribution
+    implied by states and prob vectors. 
+"""
+function distortion(dist,states, prob)
+    d = DiscreteNonParametric(states, prob)
+
+    minState = minimum(states)-1; maxState = maximum(states)+1;
+
+    integral1, err1 = quadgk(x -> dist(cdf(d,x)), minState, 0, rtol=1e-8)
+    integral2, err2 = quadgk(x -> 1-dist(cdf(d,x)), 0, maxState, rtol=1e-8)
+    return (integral2 - integral1)
+end
+
+
 """ Coherent risk measure
     Calculates a general coherent risk measure based on duality representations
 
