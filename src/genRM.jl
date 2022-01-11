@@ -126,9 +126,10 @@ function GenConvex(conds,conjugate, states, prob)
     EV = Model(with_optimizer(Ipopt.Optimizer, print_level=2))
     @variable(EV, 0 <= Z[1:n] )
     
-    register(EV, :conjugate,1,conjugate, autodiff=true)
+    #register(EV, :conjugate,1,conjugate, autodiff=true)
 
     o_tmp = :(0)
+    o_tmp2 = :(0)
     for i=1:n
         # First the set construction
         global Y = Z[i]
@@ -137,17 +138,19 @@ function GenConvex(conds,conjugate, states, prob)
         o_tmp = math_expr(oJoin,o_tmp, bla)
 
         #Now the convex conjugate
-
+        Conj = eval(conjugate)
+        o_tmp2 = math_expr(:+,o_tmp2, Conj)
     end
     o_tmp = math_expr(o2,o_tmp) # if no operation shall be carried out a unary plus o2 = :+ suffices
 
-    add_NL_constraint(EV, :($(o_tmp) <= 2))
-    @NLobjective(EV, Max, sum(states[i]*Z[i]*prob[i] for i in 1:n)  ) # - conjugate(Z) should be added
+    #add_NL_constraint(EV, :($(o_tmp) <= 2))
+    @NLobjective(EV, Max, sum(states[i]*Z[i]*prob[i] for i in 1:n) - sum(Z[i]^2 for i in 1:n) ) # - conjugate(Z) should be added
     @constraint(EV, normalized, dot(prob,Z)==1)
 
     JuMP.optimize!(EV)
     EVaR = JuMP.objective_value(EV)
     ZOpt = JuMP.value.(Z)
 	
+    #return(EVaR, ZOpt)
     return(nothing)
 end
