@@ -39,11 +39,11 @@ end
 
 
 
-""" Spectral risk measure
-    Calculates spectral risk measure by numerically integrating product
-    of quantile function and given spectral function. 
+""" Distortion risk measure
+    Calculates the distortion risk measure by numerically integrating the distorted
+    distribution function for a given distortion function. 
 
-    The quantile function is the quantile function for the discrete distribution
+    The distribution function is the one for the discrete distribution
     implied by states and prob vectors. 
 """
 function distortion(dist,states, prob)
@@ -109,11 +109,45 @@ end
 
 
 """ Convex risk measure
-    Calculates a general convex risk measure based on duality representations 
+    Calculates a general convex risk measure based on duality representations
+
+    conds must specify the feasible set of the convex conjugate
+    conjugate must be given via a "simple" expression
 """
-function GenConvex(conds,states, prob)
+function GenConvex(conds,conjugate, states, prob)
     # based on the dual representation a set of conditions can be set and
     # using IpOpt + JuMP the risk measure can be considered. 
 
-	return(nothing)
+	n = length(prob); Zopt = ones(n);
+    o1 = conds[1]; o2 = conds[3]
+    oJoin = conds[2]
+
+
+    EV = Model(with_optimizer(Ipopt.Optimizer, print_level=2))
+    @variable(EV, 0 <= Z[1:n] )
+    
+    register(EV, :conjugate,1,conjugate, autodiff=true)
+
+    o_tmp = :(0)
+    for i=1:n
+        # First the set construction
+        global Y = Z[i]
+        global p = prob[i]
+        bla = eval(o1)
+        o_tmp = math_expr(oJoin,o_tmp, bla)
+
+        #Now the convex conjugate
+
+    end
+    o_tmp = math_expr(o2,o_tmp) # if no operation shall be carried out a unary plus o2 = :+ suffices
+
+    add_NL_constraint(EV, :($(o_tmp) <= 2))
+    @NLobjective(EV, Max, sum(states[i]*Z[i]*prob[i] for i in 1:n)  ) # - conjugate(Z) should be added
+    @constraint(EV, normalized, dot(prob,Z)==1)
+
+    JuMP.optimize!(EV)
+    EVaR = JuMP.objective_value(EV)
+    ZOpt = JuMP.value.(Z)
+	
+    return(nothing)
 end
