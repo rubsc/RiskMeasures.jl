@@ -8,9 +8,38 @@ A Julia package providing several well-known coherent risk measures for finite d
 
 The following risk measures are provided either explicitly or via a primal representation.
 
-* Average Value at risk
-* mean Semi deviation
+* Average Value at risk and Conditional Tail Expectation
 * Entropic Value-at-Risk
+* mean Semi-deviation
+* Value-at-Risk
+* Entropic risk measure
+* mean Variance of order p
+* mean Deviation from target of order p
+* mean Semi-Variance
+* mean Semi-Deviation from target of order p
+
+The following general classes can also be used:
+
+* spectral risk measures
+* distortion risk measures
+* coherent risk measures based on dual representation
+* convex risk measures based on dual representation
+
+## Spectral risk measures and distortion risk measures
+
+Note that the class of spectral risk measures is equivalent with the class of distortion risk measures. They differe only in representation. 
+Spectral risk measures operate on quantile functions which are distorted by an increasing density. 
+Distortion risk measures distort the cumulative distribution functions. 
+
+For a brief example consider
+```julia
+states = [0 1]
+prob = [0.2 0.8]
+
+spec(x) = 2.0*x
+
+spectral(spec, states, prob)
+```
 
 
 ## General representation of coherent risk measures
