@@ -3,7 +3,7 @@ module riskMeasures
 # Write your package code here.
 
 
-using JuMP, LinearAlgebra, Ipopt, Distributions, QuadGK, Test, Documenter
+using JuMP, LinearAlgebra, Ipopt, Distributions, QuadGK, Test
 
 
 

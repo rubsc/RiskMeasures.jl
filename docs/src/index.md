@@ -6,7 +6,4 @@
 - provides all well known risk measures for discrete random variables or samples. 
 ```@docs
 spectral
-distortion
-genCoherent
-
 ```

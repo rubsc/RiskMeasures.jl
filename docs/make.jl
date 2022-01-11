@@ -8,6 +8,8 @@ makedocs(
          modules  = [riskMeasures],
          pages=[
                 "Home" => "index.md"
-               ])deploydocs(;
+               ])
+               
+deploydocs(;
     repo="github.com/rubsc/riskMeasures.jl",
 )
