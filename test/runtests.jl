@@ -16,6 +16,7 @@ using Test
 
     @test eval(math_expr(:+,1,2)) == 3
     @test eval(math_expr(:+,1)) == 1
+    @test eval(add_expr(1, 2)) == 3
 end
 
 @testset "basic_RM.jl" begin
