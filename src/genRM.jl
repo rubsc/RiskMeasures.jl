@@ -144,7 +144,7 @@ function GenConvex(conds,conjugate, states, prob)
     o_tmp = math_expr(o2,o_tmp) # if no operation shall be carried out a unary plus o2 = :+ suffices
 
     #add_NL_constraint(EV, :($(o_tmp) <= 2))
-    @NLobjective(EV, Max, sum(states[i]*Z[i]*prob[i] for i in 1:n) - sum(Z[i]^2 for i in 1:n) ) # - conjugate(Z) should be added
+    @NLobjective(EV, Max, sum(states[i]*Z[i]*prob[i] for i in 1:n) - 0.5*sum(Z[i]^2 for i in 1:n) ) # - conjugate(Z) should be added
     @constraint(EV, normalized, dot(prob,Z)==1)
 
     JuMP.optimize!(EV)
