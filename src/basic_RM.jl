@@ -87,7 +87,6 @@ end
 
 	t* log Ee^(Y/t)  for t>0
 
-
 """
 function entropic(theta::Float64,states, prob)
     if theta <= 0

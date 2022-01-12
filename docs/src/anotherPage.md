@@ -1,19 +1,16 @@
-# The riskMeasures.jl Module
+# The MyAwesomePackage Module
 
-```@docs
-    riskMeasures
-```
+
 
 ## Module Index
 
 ```@index
 Modules = [riskMeasures]
-Order = [:constant, :type, :function, :macro]
+Order   = [:constant, :type, :function, :macro]
 ```
-
 ## Detailed API
 
 ```@autodocs
 Modules = [riskMeasures]
-Order = [:constant, :type, :function, :macro]
+Order   = [:constant, :type, :function, :macro]
 ```

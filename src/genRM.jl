@@ -66,16 +66,14 @@ end
     
     
 """
-
+function GenCoherent(conds,states, prob)
+    
 # For testing : 
  #states = [1 2 3]; prob = [0.3 0.4 0.3]
  #o1 = :( (Y)^2 *p)
  #o2 = :(sqrt)
  #oJoin = :+
  #conds = [o1 oJoin o2]
-function GenCoherent(conds,states, prob)
-    # based on the dual representation a set of conditions can be set and
-    # using IpOpt + JuMP the risk measure can be considered. 
 
     n = length(prob); Zopt = ones(n);
     o1 = conds[1]; o2 = conds[3]
