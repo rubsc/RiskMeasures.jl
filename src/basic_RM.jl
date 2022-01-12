@@ -43,8 +43,12 @@ end
 ###################################
 
 
- 
+""" An implementation of the Value-at-Risk at level α for 
+a given discrete distribution specified by
 
+states
+prob
+"""
 function VaR(states,prob,alpha)
     # look for smallest x such that  P(-states <= x) >alpha , i.e.
     ind = sortperm(states[1:length(states)])
@@ -63,7 +67,12 @@ function VaR(states,prob,alpha)
     return(quantile(d,alpha))
 end
 
+""" An implementation of the Conditional Tail-Value-at-Risk at level α for 
+a given discrete distribution specified by
 
+states
+prob
+"""
 function CTE2(states,prob,alpha)
     tmp = VaR(states,prob,alpha)
     tmp2 = tmp + 1/(1-alpha) * dot(prob, max.(states .- tmp,0))
