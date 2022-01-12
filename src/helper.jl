@@ -7,6 +7,7 @@ function pnorm(p,prob,Y)
 end
 
 
+
 function ontoSimplex(x)
     #projets given probabilities onto standard simplex to satisfy
     #sum(probabilities)= 1 and probabilities>= 0
