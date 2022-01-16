@@ -7,6 +7,15 @@
 
 A Julia package providing several well-known coherent risk measures for finite dimensional random variables.
 
+
+ ## ToDo:
+ add tutorial on coherent/convex risk measures
+  --> how to construct sets
+  --> add visualization for sets
+  --> discuss properties of risk measures
+  --> add dynamic risk measures based BSDEs
+ 
+ 
 The following risk measures are provided either explicitly or via a primal representation.
 
 * Average Value at risk and Conditional Tail Expectation
