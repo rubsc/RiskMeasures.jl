@@ -55,11 +55,16 @@ function EVaR2(beta::Float64,states, prob)
 end
 
 
+""" 
+EVaR(states,prob,beta)
 
-""" Solving the optimization problem associated with evaluating EVaR as well
-	as providing the dual variables
+Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
 
-	min (β+log Ee^(t*Y)	)/t  for t>0
+```math
+EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x] \\left( \\beta +  \\log\\mathbb{E} e^{xY} \\right),
+```
+where ``Y`` is the discrete random variable defined by `states` and `prob`.
+
 
 """
 function EVaR(beta,states, prob)
@@ -113,7 +118,7 @@ AVaR(states,prob,alpha)
 Solves the optimization problem associated with the primal formulation of the Average Value-at-Risk:
 
 ```math
-AVaR_\alpha(Y) = \min_{x\in \mathbb{R}} x + \frac{1}{1-\alpha} \mathbb{E} \left( Y - x \right)_+,
+AVaR_\\alpha(Y) = \\min_{x\\in \\mathbb{R}} x + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y - x \\right)_+,
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
 

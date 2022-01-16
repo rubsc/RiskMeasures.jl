@@ -8,7 +8,7 @@ Computes the expectation for the random variable ``Y`` with values given by `sta
 the probability measure ``Q`` given by `prob`:
 
 ```math
-\mathbb{E} Y = states \cdot prob
+\\mathbb{E} Y = states \\cdot prob
 
 ```
 """
