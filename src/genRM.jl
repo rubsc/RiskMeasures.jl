@@ -41,14 +41,15 @@ function spectral(states, prob,spec)
 	return(integral)
 end
 
-
-
-""" Distortion risk measure
-    Calculates the distortion risk measure by numerically integrating the distorted
-    distribution function for a given distortion function. 
-
-    The distribution function is the one for the discrete distribution
-    implied by states and prob vectors. 
+""" 
+distortion(states, prob,dist)
+    
+implements the distortion risk measure    
+```math
+\\rho(Y) := \\int_0^\\infty 1- dist(F_Y(x)) dx - \\int_{-\infty}^0 dist(F_Y(x) dx,
+```
+where ``Y`` is the discrete random variable defined by `states` and `prob` and ``dist(\\cdot)`` denotes the distortion function which is
+a right-continuous distribution function.
 """
 function distortion(states, prob,dist)
     d = DiscreteNonParametric(states, prob)
@@ -61,14 +62,14 @@ function distortion(states, prob,dist)
 end
 
 
-""" Coherent risk measure
-    Calculates a general coherent risk measure based on duality representations
+"""
+GenCoherent(conds,states, prob)
 
-    for coherent risk measures the conditions E(Z) = 1 and Z ≥ 0 are enforced.
-    conds needs to be a real valued function F such that F(Z) ≤ 0.
-    To obtain a coherent risk measure F should be positively homegeneous.
-    
-    
+implements a generic coherent risk measure based on the dual representation
+```math
+\\rho(Y) := \\sup \\left( \\mathbb{E} YZ \\colon \\mathbb{E}Z=1, Z\\geq 0, F(Z) \\leq c \\right),
+```
+where ``F(\\cdot)`` is a positively homegeneous and convex function and c is a constant.     
 """
 function GenCoherent(conds,states, prob)
     
