@@ -4,6 +4,7 @@ module riskMeasures
 
 
 using JuMP, LinearAlgebra, Ipopt, Distributions, QuadGK, Test
+using NeuralPDE
 
 
 
