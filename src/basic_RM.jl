@@ -24,11 +24,14 @@ end
 #########################################################
 #Mean Semi-deviation
 #########################################################
-""" An implementation of the Mean semi-deviation risk measure of
-	order p. This is a coherent risk measure which can be nested by
-	adjusting the risk level β → β⋅√(Δt)
+""" 
+mSD(states,prob,beta,p)
 
-	mSD_β^p(Y) = EY + β ⋅ ||(Y-EY)_+||_p
+implements the mean semi-deviation of order `p` which is a coherent risk measure defined by
+```math
+mSD_\\beta^p (Y) = \\mathbb{E} Y  + \\beta \\lvert \\left( Y - \\mathbb{E}Y \\right)_+ \\rvert_p,
+
+for the random variable ``Y`` defined by `states` and `prob`.
 """
 function mSD(states,prob,beta,p)
 	if sum(prob) == 0
@@ -46,13 +49,14 @@ end
 
 
 ###################################
+""" 
+VaR(states,prob,alpha)
 
+implements the Value-at-Risk at level ``α`` defined by
+```math
+VaR_\\alpha (Y) = \\argmin_x \left{ x\\in \\mathbb{R} : F_Y(x) \\geq \alpha \\right },
 
-""" An implementation of the Value-at-Risk at level α for 
-a given discrete distribution specified by
-
-states
-prob
+for the random variable ``Y`` defined by `states` and `prob`.
 """
 function VaR(states,prob,alpha)
     # look for smallest x such that  P(-states <= x) >alpha , i.e.
@@ -72,11 +76,14 @@ function VaR(states,prob,alpha)
     return(quantile(d,alpha))
 end
 
-""" An implementation of the Conditional Tail-Value-at-Risk at level α for 
-a given discrete distribution specified by
+""" 
+CTE2(states,prob,alpha)
 
-states
-prob
+implements the Conditional Value-at-Risk at level ``α`` defined by
+```math
+CTE_\\alpha (Y) = VaR_\\alpha(Y) + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y- VaR_\\alpha (Y) \\right)_+ ,
+
+for the random variable ``Y`` defined by `states` and `prob`.
 """
 function CTE2(states,prob,alpha)
     tmp = VaR(states,prob,alpha)
