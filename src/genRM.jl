@@ -63,7 +63,7 @@ end
 
 
 """
-GenCoherent(conds,states, prob)
+GenCoherent(states, prob,conds)
 
 implements a generic coherent risk measure based on the dual representation
 ```math
