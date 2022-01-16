@@ -8,13 +8,17 @@
 
 
 
+""" 
+spectral(states, prob, spec)
+    
+implements the spectral risk measure    
+```math
+\\rho(Y) := \\int_0^1 spec(x) \\cdot F_Y^{-1}(\\alpha) d\\alpha,
+```
+where ``Y`` is the discrete random variable defined by `states` and `prob` and ``spec(\\cdot)`` denotes the spectral function which is
 
-""" Spectral risk measure
-    Calculates spectral risk measure by numerically integrating product
-    of quantile function and given spectral function. 
-
-    The quantile function is the quantile function for the discrete distribution
-    implied by states and prob vectors. 
++ increasing
++ integrates to 1.
 """
 function spectral(spec,states, prob)
     # spec(x) = x^2
