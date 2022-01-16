@@ -38,3 +38,12 @@ pdealg = NNPDENS(u0, σᵀ∇u, opt=opt)
 
 ans = solve(prob, pdealg, verbose=true, maxiters=550, trajectories=1000,
                             alg=EM(), dt=0.2, pabstol = 1f-6)
+
+
+
+function dynamicRisk(process, RM)
+
+
+
+    return(nothing)
+end
