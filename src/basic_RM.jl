@@ -21,82 +21,6 @@ end
 
 
 
-#########################################################
-#Mean Semi-deviation
-#########################################################
-""" 
-
-mSD(states,prob,beta,p)
-
-implements the mean semi-deviation of order `p` which is a coherent risk measure defined by
-```math
-mSD_\\beta^p (Y) = \\mathbb{E} Y  + \\beta \\lvert \\left( Y - \\mathbb{E}Y \\right)_+ \\rvert_p,
-```
-for the random variable ``Y`` defined by `states` and `prob`.
-"""
-function mSD(states,prob,beta,p)
-	if sum(prob) == 0
-		prob = ones(length(states))./ length(states)
-	end
-
-	if beta == 0.0
-		mSD = dot(prob, states)
-	else
-		tmp = max.(states .- dot(prob,states),0)
-		mSD = dot(prob,states) + beta*pnorm(p,prob,tmp)
-	end
-	return(mSD)
-end
-
-
-###################################
-""" 
-
-VaR(states,prob,alpha)
-
-implements the Value-at-Risk at level ``\\alpha`` defined by
-```math
-VaR_\\alpha (Y) = \\arg \\min_x \\left( x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha \\right),
-```
-for the random variable ``Y`` defined by `states` and `prob`.
-"""
-function VaR(states,prob,alpha)
-    # look for smallest x such that  P(-states <= x) >alpha , i.e.
-    ind = sortperm(states[1:length(states)])
-    states = states[ind]; probs = prob[ind];
-    probs2 = prob
-    for i=length(states):-1:2
-        if(states[i] == states[i-1])
-            probs2[i] = probs2[i] + probs2[i-1]
-        end
-    end
-
-    bla = unique(i -> states[i], length(states):-1:1)
-    probs3 = probs2[bla]
-    states2 = states[bla]
-    d = DiscreteNonParametric(states2, probs3)
-    return(quantile(d,alpha))
-end
-
-""" 
-
-CTE2(states,prob,alpha)
-
-implements the Conditional Value-at-Risk at level ``\\alpha`` defined by
-```math
-CTE_\\alpha (Y) = VaR_\\alpha(Y) + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y- VaR_\\alpha (Y) \\right)_+ ,
-```
-for the random variable ``Y`` defined by `states` and `prob`.
-"""
-function CTE2(states,prob,alpha)
-    tmp = VaR(states,prob,alpha)
-    tmp2 = tmp + 1/(1-alpha) * dot(prob, max.(states .- tmp,0))
-    return sum(tmp2)
-end
-
-
-
-
 """
 
 entropic(states, prob,theta)
@@ -127,15 +51,43 @@ function entropic(states, prob,theta::Float64)
 end
 
 
+#########################################################
+#Mean Semi-deviation
+#########################################################
+""" 
+
+mSD(states,prob,beta,p)
+
+implements the mean semi-deviation of order `p` which is a coherent risk measure defined by
+```math
+mSD_\\beta^p (Y) = \\mathbb{E} Y  + \\beta \\lvert \\left( Y - \\mathbb{E}Y \\right)_+ \\rvert_p,
+```
+for the random variable ``Y`` defined by `states` and `prob`.
+"""
+function mSD(states,prob,beta,p)
+	if sum(prob) == 0
+		prob = ones(length(states))./ length(states)
+	end
+
+	if beta == 0.0
+		mSD = dot(prob, states)
+	else
+		tmp = max.(states .- dot(prob,states),0)
+		mSD = dot(prob,states) + beta*pnorm(p,prob,tmp)
+	end
+	return(mSD)
+end
+
+
 """
 
 meanVariance(states, prob,c)
 
 implements the mean Variance risk measure defined by
 ```math
-rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y- \\mathbb{E}Y)^2 \\right),
+\\varrho_c(Y) := \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y- \\mathbb{E}Y)^2 \\right),
 ```
-where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
+where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
 function meanVariance(states, prob,c::Float64)
     if c<0
@@ -158,7 +110,7 @@ meanDeviation(states, prob,c,p)
 
 implements the mean deviation risk measure of order ``p\\geq 1`` defined by
 ```math
-rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y \\right)^2 \\rVert_p,
+\\varrho_c^p(Y) := \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y \\right)^2 \\rVert_p,
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
@@ -184,15 +136,15 @@ end
 
 """
 
-meanSemiVariance(states, prob,c,target)
+meanSemiVariance(states, prob,c,t)
 
 implements the mean upper-semi variance risk measure from a target ``t`` defined by
 ```math
-rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y - t \\right)^2_+ ,
+\\varrho_{c,t}(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y - t \\right)^2_+ ,
 ```
-where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
+where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
-function meanSemiVariance(states, prob,c::Float64,target::Float64)
+function meanSemiVariance(states, prob,c::Float64,t::Float64)
     if c<0
         return(nothing)
     end
@@ -202,7 +154,7 @@ function meanSemiVariance(states, prob,c::Float64,target::Float64)
 	end
 	
     tmp1 = dot(states,prob)
-    tmp2 = pnorm(2,prob, max.(states .- target,0))^2;
+    tmp2 = pnorm(2,prob, max.(states .- t,0))^2;
 	return(tmp1 + c*tmp2) 
 end
 
@@ -214,9 +166,9 @@ meanSemiDevi(states, prob,c,target,p)
 
 implements the mean upper-semi variance risk measure of order ``p \\geq 1`` from a target ``t`` defined by
 ```math
-rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y - t \\right)_+ \\rVert_p ,
+\\varrho_{c,t}^p(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y - t \\right)_+ \\rVert_p ,
 ```
-where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
+where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
 function meanSemiDevi(states, prob,c::Float64,target::Float64,p::Float64)
     if c<0

@@ -1,7 +1,52 @@
-# Includes value at risk measures
-
 
 """ 
+
+VaR(states,prob,alpha)
+
+implements the Value-at-Risk at level ``\\alpha`` defined by
+```math
+VaR_\\alpha (Y) = \\arg \\min_x \\left( x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha \\right),
+```
+for the random variable ``Y`` defined by `states` and `prob`.
+"""
+function VaR(states,prob,alpha)
+    # look for smallest x such that  P(-states <= x) >alpha , i.e.
+    ind = sortperm(states[1:length(states)])
+    states = states[ind]; probs = prob[ind];
+    probs2 = prob
+    for i=length(states):-1:2
+        if(states[i] == states[i-1])
+            probs2[i] = probs2[i] + probs2[i-1]
+        end
+    end
+
+    bla = unique(i -> states[i], length(states):-1:1)
+    probs3 = probs2[bla]
+    states2 = states[bla]
+    d = DiscreteNonParametric(states2, probs3)
+    return(quantile(d,alpha))
+end
+
+""" 
+
+CTE2(states,prob,alpha)
+
+implements the Conditional Value-at-Risk at level ``\\alpha`` defined by
+```math
+CTE_\\alpha (Y) = VaR_\\alpha(Y) + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y- VaR_\\alpha (Y) \\right)_+ ,
+```
+for the random variable ``Y`` defined by `states` and `prob`.
+"""
+function CTE2(states,prob,alpha)
+    tmp = VaR(states,prob,alpha)
+    tmp2 = tmp + 1/(1-alpha) * dot(prob, max.(states .- tmp,0))
+    return sum(tmp2)
+end
+
+
+
+"""
+
 EVaR2(states,prob,beta)
 
 Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
@@ -57,7 +102,8 @@ function EVaR2(states, prob,beta::Float64)
 end
 
 
-""" 
+"""
+
 EVaR(states,prob,beta)
 
 Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
@@ -112,7 +158,8 @@ end
 
 
 
-""" 
+"""
+
 AVaR(states,prob,alpha)
 
 Solves the optimization problem associated with the primal formulation of the Average Value-at-Risk:

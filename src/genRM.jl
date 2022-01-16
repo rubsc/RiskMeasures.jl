@@ -1,14 +1,11 @@
-# General abstract formulation of risk measures
-    # Spectral risk measures --> Done
-    # Coherent risk measures based on dual formulation --> Concept done
-    # Convex risk measures based on dual formulation    --> Concept done
-    # utility based risk measures --> build check for utility functions
+# utility based risk measures --> build check for utility functions
 
 
 
 
 
 """ 
+
 spectral(states, prob, spec)
     
 implements the spectral risk measure    
@@ -42,6 +39,7 @@ function spectral(states, prob,spec)
 end
 
 """ 
+
 distortion(states, prob,dist)
     
 implements the distortion risk measure    
@@ -63,6 +61,7 @@ end
 
 
 """
+
 GenCoherent(states, prob,conds)
 
 implements a generic coherent risk measure based on the dual representation
@@ -111,6 +110,7 @@ function GenCoherent(states, prob,conds)
 end
 
 """
+
 GenConvex(states, prob, conds, conjugate)
 
 implements a generic coherent risk measure based on the dual representation
