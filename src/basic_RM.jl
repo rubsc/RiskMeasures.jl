@@ -106,6 +106,7 @@ end
 
 """
 
+$(SIGNATURES)
 meanDeviation(states, prob,c,p)
 
 implements the mean deviation risk measure of order ``p\\geq 1`` defined by
