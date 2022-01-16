@@ -102,7 +102,7 @@ rho_\\theta(Y) = theta \\cdot \\log \\mathbb{E} e^{\\frac{Y}{\\theta},
 ```
 where ``\\theta`` is greater 0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
-function entropic(theta::Float64,states, prob)
+function entropic(states, prob,theta::Float64)
     if theta <= 0
         return(nothing)
     end
@@ -131,7 +131,7 @@ rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y- \\mathbb{E}Y)^2 
 ```
 where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
-function meanVariance(c::Float64,states, prob)
+function meanVariance(states, prob,c::Float64)
     if c<0
         return(nothing)
     end
@@ -156,7 +156,7 @@ rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y)^2 \\rV
 where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
 
-function meanDeviation(c::Float64,p::Float64,states, prob)
+function meanDeviation(states, prob,c::Float64,p::Float64)
     if c<0
         return(nothing)
     end
@@ -179,7 +179,7 @@ end
 """ Mean-upper-semivariance from a target
 
 """
-function meanSemiVariance(c::Float64,target::Float64,states, prob)
+function meanSemiVariance(states, prob,c::Float64,target::Float64)
     if c<0
         return(nothing)
     end
@@ -198,7 +198,7 @@ end
 """ Mean-upper-semideviation of order p from a target
 
 """
-function meanSemiDevi(c::Float64,target::Float64,p::Float64,states, prob)
+function meanSemiDevi(states, prob,c::Float64,target::Float64,p::Float64)
     if c<0
         return(nothing)
     end

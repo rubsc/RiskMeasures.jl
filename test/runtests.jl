@@ -56,24 +56,24 @@ end
     states = [1 2 3 4]; prob = [0.2 0.4 0.2 0.2]
 
     
-    @test entropic(1.0,states, prob) ≈ 2.91430 atol = 0.001
-    @test entropic(0.5,[1 1], [0.0 0.0]) == 1.0
-    @test entropic(0.0,[1 1], [0.0 0.0]) === nothing
+    @test entropic(states, prob,1.0) ≈ 2.91430 atol = 0.001
+    @test entropic([1 1], [0.0 0.0],0.5) == 1.0
+    @test entropic([1 1], [0.0 0.0],0.0) === nothing
 
-    @test meanVariance(-1.0,[1 1], [0.0 0.0]) === nothing
-    @test meanVariance(1.0,[1 1], [0.0 0.0]) == 1.0
+    @test meanVariance([1 1], [0.0 0.0],-1.0) === nothing
+    @test meanVariance([1 1], [0.0 0.0],1.0) == 1.0
 
-    @test meanDeviation(-1.0,2.0,[1 1], [0.0 0.0]) === nothing
-    @test meanDeviation(1.0,2.0,[1 1], [0.0 0.0]) == 1.0
-    @test meanDeviation(-1.0,0.5,[1 1], [0.0 0.0]) === nothing
-    @test meanDeviation(1.0,0.5,[1 1], [0.0 0.0]) === nothing
+    @test meanDeviation([1 1], [0.0 0.0],-1.0,2.0) === nothing
+    @test meanDeviation([1 1], [0.0 0.0],1.0,2.0) == 1.0
+    @test meanDeviation([1 1], [0.0 0.0],-1.0,0.5) === nothing
+    @test meanDeviation([1 1], [0.0 0.0],1.0,0.5) === nothing
 
-    @test meanSemiVariance(1.0, 0.0, [1 1], [0 0]) == 2.0
-    @test meanSemiVariance(-1.0, 0.0, [1 1], [0 0]) === nothing
+    @test meanSemiVariance([1 1], [0 0],1.0, 0.0) == 2.0
+    @test meanSemiVariance([1 1], [0 0],-1.0, 0.0) === nothing
 
-    @test meanSemiDevi(1.0, 0.0, 2.0, [1 1], [0 0]) == 2.0
-    @test meanSemiDevi(-1.0, 0.0, 2.0, [1 1], [0 0]) === nothing
-    @test meanSemiDevi(1.0, 0.0, -2.0, [1 1], [0 0]) === nothing
+    @test meanSemiDevi([1 1], [0 0],1.0, 0.0, 2.0) == 2.0
+    @test meanSemiDevi([1 1], [0 0],-1.0, 0.0, 2.0) === nothing
+    @test meanSemiDevi([1 1], [0 0],1.0, 0.0, -2.0) === nothing
 
     @test spectral([0, 1], [0.2, 0.8], x -> 2.0*x) ≈ 0.96 atol = 0.0001
     @test spectral([0, 1], [0.2, 0.8], x -> x) === nothing
@@ -82,7 +82,7 @@ end
 
     o1 = :( (Y)^2 *p); o2 = :sqrt; conds = [o1 :+ o2]; 
     states = [1 2 3]; prob = [0.3 0.4 0.3];
-    @test GenCoherent(conds,states, prob,conds)[1] ≈ 3.0 atol = 0.0001
+    @test GenCoherent(states, prob,conds)[1] ≈ 3.0 atol = 0.0001
 
     @test GenConvex(states, prob,conds,x->x) === nothing
 end
