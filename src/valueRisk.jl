@@ -7,7 +7,7 @@ EVaR2(states,prob,beta)
 Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
 
 ```math
-EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x] \\left( \\beta +  \\log\\mathbb{E} e^{xY} \\right),
+EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x} \\left( \\beta +  \\log\\mathbb{E} e^{xY} \\right),
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
 Here the optimization is done via the goldenSearch optimization routine implemented as part of this package. 
@@ -63,10 +63,9 @@ EVaR(states,prob,beta)
 Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
 
 ```math
-EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x] \\left( \\beta +  \\log\\mathbb{E} e^{xY} \\right),
+EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x} \\left( \\beta +  \\log\\mathbb{E} e^{xY} \\right),
 ```
-where ``Y`` is the discrete random variable defined by `states` and `prob`.
-Here, the optimization is done using JuMP and Ipopt.  
+where ``Y`` is the discrete random variable defined by `states` and `prob`. Here, the optimization is done using JuMP and Ipopt.  
 """
 function EVaR(states, prob,beta)
 	if sum(prob) == 0

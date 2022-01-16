@@ -53,7 +53,7 @@ VaR(states,prob,alpha)
 
 implements the Value-at-Risk at level ``\\alpha`` defined by
 ```math
-VaR_\\alpha (Y) = \\argmin_x \\left{ x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha \\right },
+VaR_\\alpha (Y) = \\argmin_x \\left{ x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha \\right},
 ```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
