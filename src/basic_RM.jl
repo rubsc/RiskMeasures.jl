@@ -98,7 +98,7 @@ entropic(states, prob,theta)
 
 implements the entropic risk measure defined as
 ```math
-rho_\\theta(Y) = theta \\cdot \\log \\mathbb{E} e^{\\frac{Y}{\\theta},
+rho_\\theta(Y) = \\theta \\cdot \\log \\mathbb{E} e^{\\frac{Y}{\\theta}},
 ```
 where ``\\theta`` is greater 0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
@@ -175,9 +175,14 @@ end
 
 
 
+"""
+meanSemiVariance(states, prob,c::Float64,target::Float64)
 
-""" Mean-upper-semivariance from a target
-
+implements the mean upper-semi variance risk measure from a target ``t`` defined by
+```math
+rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y - t \\right)^2_+ ,
+```
+where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
 function meanSemiVariance(states, prob,c::Float64,target::Float64)
     if c<0
@@ -195,8 +200,14 @@ end
 
 
 
-""" Mean-upper-semideviation of order p from a target
+"""
+meanSemiDevi(states, prob,c::Float64,target::Float64,p::Float64)
 
+implements the mean upper-semi variance risk measure of order ``p \\geq 1`` from a target ``t`` defined by
+```math
+rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y - t \\right)_+ \\rVert_p ,
+```
+where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
 function meanSemiDevi(states, prob,c::Float64,target::Float64,p::Float64)
     if c<0
