@@ -20,7 +20,7 @@ where ``Y`` is the discrete random variable defined by `states` and `prob` and `
 + increasing
 + integrates to 1.
 """
-function spectral(spec,states, prob)
+function spectral(states, prob,spec)
     # spec(x) = x^2
     # spectral(spec, [1, 2], [0.2, 0.8])
 
@@ -50,7 +50,7 @@ end
     The distribution function is the one for the discrete distribution
     implied by states and prob vectors. 
 """
-function distortion(dist,states, prob)
+function distortion(states, prob,dist)
     d = DiscreteNonParametric(states, prob)
 
     minState = minimum(states)-1; maxState = maximum(states)+1;
