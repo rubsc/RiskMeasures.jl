@@ -52,9 +52,9 @@ end
 """ 
 VaR(states,prob,alpha)
 
-implements the Value-at-Risk at level ``α`` defined by
+implements the Value-at-Risk at level ``\\alpha`` defined by
 ```math
-VaR_\\alpha (Y) = \\argmin_x \left{ x\\in \\mathbb{R} : F_Y(x) \\geq \alpha \\right },
+VaR_\\alpha (Y) = \\argmin_x \\left{ x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha \\right },
 
 for the random variable ``Y`` defined by `states` and `prob`.
 """
@@ -79,7 +79,7 @@ end
 """ 
 CTE2(states,prob,alpha)
 
-implements the Conditional Value-at-Risk at level ``α`` defined by
+implements the Conditional Value-at-Risk at level ``\\alpha`` defined by
 ```math
 CTE_\\alpha (Y) = VaR_\\alpha(Y) + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y- VaR_\\alpha (Y) \\right)_+ ,
 
