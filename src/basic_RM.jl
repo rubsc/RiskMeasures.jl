@@ -9,7 +9,6 @@ the probability measure ``Q`` given by `prob`:
 
 ```math
 \\mathbb{E} Y = states \\cdot prob
-
 ```
 """
 function Expectation(states,prob)
@@ -30,7 +29,7 @@ mSD(states,prob,beta,p)
 implements the mean semi-deviation of order `p` which is a coherent risk measure defined by
 ```math
 mSD_\\beta^p (Y) = \\mathbb{E} Y  + \\beta \\lvert \\left( Y - \\mathbb{E}Y \\right)_+ \\rvert_p,
-
+```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
 function mSD(states,prob,beta,p)
@@ -55,7 +54,7 @@ VaR(states,prob,alpha)
 implements the Value-at-Risk at level ``\\alpha`` defined by
 ```math
 VaR_\\alpha (Y) = \\argmin_x \\left{ x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha \\right },
-
+```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
 function VaR(states,prob,alpha)
@@ -82,7 +81,7 @@ CTE2(states,prob,alpha)
 implements the Conditional Value-at-Risk at level ``\\alpha`` defined by
 ```math
 CTE_\\alpha (Y) = VaR_\\alpha(Y) + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y- VaR_\\alpha (Y) \\right)_+ ,
-
+```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
 function CTE2(states,prob,alpha)
