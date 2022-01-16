@@ -2,6 +2,7 @@
 # Includes basic risk measures and statistics without optimization
 
 """
+
 Expectation(states,prob)
 
 Computes the expectation for the random variable ``Y`` with values given by `states` under
@@ -24,6 +25,7 @@ end
 #Mean Semi-deviation
 #########################################################
 """ 
+
 mSD(states,prob,beta,p)
 
 implements the mean semi-deviation of order `p` which is a coherent risk measure defined by
@@ -49,6 +51,7 @@ end
 
 ###################################
 """ 
+
 VaR(states,prob,alpha)
 
 implements the Value-at-Risk at level ``\\alpha`` defined by
@@ -76,6 +79,7 @@ function VaR(states,prob,alpha)
 end
 
 """ 
+
 CTE2(states,prob,alpha)
 
 implements the Conditional Value-at-Risk at level ``\\alpha`` defined by
@@ -94,6 +98,7 @@ end
 
 
 """
+
 entropic(states, prob,theta)
 
 implements the entropic risk measure defined as
@@ -123,6 +128,7 @@ end
 
 
 """
+
 meanVariance(states, prob,c)
 
 implements the mean Variance risk measure defined by
@@ -147,13 +153,14 @@ end
 
 
 """
+
 meanDeviation(states, prob,c,p)
 
 implements the mean deviation risk measure of order ``p\\geq 1`` defined by
 ```math
-rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y)^2 \\rVert_p,
+rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y \\right)^2 \\rVert_p,
 ```
-where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
+where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
 
 function meanDeviation(states, prob,c::Float64,p::Float64)
@@ -176,7 +183,8 @@ end
 
 
 """
-meanSemiVariance(states, prob,c::Float64,target::Float64)
+
+meanSemiVariance(states, prob,c,target)
 
 implements the mean upper-semi variance risk measure from a target ``t`` defined by
 ```math
@@ -201,7 +209,8 @@ end
 
 
 """
-meanSemiDevi(states, prob,c::Float64,target::Float64,p::Float64)
+
+meanSemiDevi(states, prob,c,target,p)
 
 implements the mean upper-semi variance risk measure of order ``p \\geq 1`` from a target ``t`` defined by
 ```math
