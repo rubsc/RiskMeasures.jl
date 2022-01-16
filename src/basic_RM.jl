@@ -30,7 +30,7 @@ end
 
 	mSD_β^p(Y) = EY + β ⋅ ||(Y-EY)_+||_p
 """
-function mSD(beta,p,states,prob)
+function mSD(states,prob,beta,p)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end

@@ -1,16 +1,18 @@
 # Includes value at risk measures
 
 
+""" 
+EVaR2(states,prob,beta)
 
-""" Solving the optimization problem associated with evaluating EVaR as well
-	as providing the dual variables
+Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
 
-	min (β+log Ee^(t*Y)	)/t  for t>0
-
-	Here with goldenSearch Algorithm
-
+```math
+EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x] \\left( \\beta +  \\log\\mathbb{E} e^{xY} \\right),
+```
+where ``Y`` is the discrete random variable defined by `states` and `prob`.
+Here the optimization is done via the goldenSearch optimization routine implemented as part of this package. 
 """
-function EVaR2(beta::Float64,states, prob)
+function EVaR2(states, prob,beta::Float64)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
@@ -64,8 +66,7 @@ Solves the optimization problem associated with the primal formulation of the En
 EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x] \\left( \\beta +  \\log\\mathbb{E} e^{xY} \\right),
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
-
-
+Here, the optimization is done using JuMP and Ipopt.  
 """
 function EVaR(beta,states, prob)
 	if sum(prob) == 0
@@ -121,8 +122,6 @@ Solves the optimization problem associated with the primal formulation of the Av
 AVaR_\\alpha(Y) = \\min_{x\\in \\mathbb{R}} x + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y - x \\right)_+,
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
-
-
 """
 function AVaR(states,prob, alpha)
     var2 = dot(prob, (states .- dot(prob,states)).^2);
