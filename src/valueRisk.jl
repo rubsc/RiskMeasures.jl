@@ -106,6 +106,19 @@ function EVaR(beta,states, prob)
 end
 
 
+
+""" 
+AVaR(states,prob,alpha)
+
+Solves the optimization problem associated with the primal formulation of the Average Value-at-Risk:
+
+```math
+AVaR_\alpha(Y) = \min_{x\in \mathbb{R}} x + \frac{1}{1-\alpha} \mathbb{E} \left( Y - x \right)_+,
+```
+where ``Y`` is the discrete random variable defined by `states` and `prob`.
+
+
+"""
 function AVaR(states,prob, alpha)
     var2 = dot(prob, (states .- dot(prob,states)).^2);
      #First trivial case
