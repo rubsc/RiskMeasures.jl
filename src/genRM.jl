@@ -5,8 +5,7 @@
 
 
 """ 
-
-spectral(states, prob, spec)
+    spectral(states, prob, spec)
     
 implements the spectral risk measure    
 ```math
@@ -39,8 +38,7 @@ function spectral(states, prob,spec)
 end
 
 """ 
-
-distortion(states, prob,dist)
+    distortion(states, prob,dist)
     
 implements the distortion risk measure    
 ```math
@@ -61,8 +59,7 @@ end
 
 
 """
-
-GenCoherent(states, prob,conds)
+    GenCoherent(states, prob,conds)
 
 implements a generic coherent risk measure based on the dual representation
 ```math
@@ -110,8 +107,7 @@ function GenCoherent(states, prob,conds)
 end
 
 """
-
-GenConvex(states, prob, conds, conjugate)
+    GenConvex(states, prob, conds, conjugate)
 
 implements a generic coherent risk measure based on the dual representation
 ```math

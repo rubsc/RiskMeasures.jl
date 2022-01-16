@@ -1,7 +1,6 @@
 
 """ 
-
-VaR(states,prob,alpha)
+    VaR(states,prob,alpha)
 
 implements the Value-at-Risk at level ``\\alpha`` defined by
 ```math
@@ -28,8 +27,7 @@ function VaR(states,prob,alpha)
 end
 
 """ 
-
-CTE2(states,prob,alpha)
+    CTE2(states,prob,alpha)
 
 implements the Conditional Value-at-Risk at level ``\\alpha`` defined by
 ```math
@@ -46,8 +44,7 @@ end
 
 
 """
-
-EVaR2(states,prob,beta)
+    EVaR2(states,prob,beta)
 
 Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
 
@@ -103,8 +100,7 @@ end
 
 
 """
-
-EVaR(states,prob,beta)
+    EVaR(states,prob,beta)
 
 Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
 
@@ -159,8 +155,7 @@ end
 
 
 """
-
-AVaR(states,prob,alpha)
+    AVaR(states,prob,alpha)
 
 Solves the optimization problem associated with the primal formulation of the Average Value-at-Risk:
 

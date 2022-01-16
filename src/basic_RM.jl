@@ -2,8 +2,7 @@
 # Includes basic risk measures and statistics without optimization
 
 """
-
-Expectation(states,prob)
+    Expectation(states,prob)
 
 Computes the expectation for the random variable ``Y`` with values given by `states` under
 the probability measure ``Q`` given by `prob`:
@@ -22,12 +21,11 @@ end
 
 
 """
-
-entropic(states, prob,theta)
+    entropic(states, prob,theta)
 
 implements the entropic risk measure defined as
 ```math
-rho_\\theta(Y) = \\theta \\cdot \\log \\mathbb{E} e^{\\frac{Y}{\\theta}},
+\\rho_\\theta(Y) = \\theta \\cdot \\log \\mathbb{E} e^{\\frac{Y}{\\theta}},
 ```
 where ``\\theta`` is greater 0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
@@ -55,8 +53,7 @@ end
 #Mean Semi-deviation
 #########################################################
 """ 
-
-mSD(states,prob,beta,p)
+    mSD(states,prob,beta,p)
 
 implements the mean semi-deviation of order `p` which is a coherent risk measure defined by
 ```math
@@ -80,12 +77,11 @@ end
 
 
 """
-
-meanVariance(states, prob,c)
+    meanVariance(states, prob,c)
 
 implements the mean Variance risk measure defined by
 ```math
-\\varrho_c(Y) := \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y- \\mathbb{E}Y)^2 \\right),
+\\rho_c(Y) := \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y- \\mathbb{E}Y)^2 \\right),
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
@@ -105,13 +101,11 @@ end
 
 
 """
-
-$(SIGNATURES)
-meanDeviation(states, prob,c,p)
+    meanDeviation(states, prob,c,p)
 
 implements the mean deviation risk measure of order ``p\\geq 1`` defined by
 ```math
-\\varrho_c^p(Y) := \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y \\right)^2 \\rVert_p,
+\\rho_c^p(Y) := \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y \\right)^2 \\rVert_p,
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
@@ -136,12 +130,11 @@ end
 
 
 """
-
-meanSemiVariance(states, prob,c,t)
+    meanSemiVariance(states, prob,c,t)
 
 implements the mean upper-semi variance risk measure from a target ``t`` defined by
 ```math
-\\varrho_{c,t}(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y - t \\right)^2_+ ,
+\\rho_{c,t}(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y - t \\right)^2_+ ,
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
@@ -162,12 +155,11 @@ end
 
 
 """
-
-meanSemiDevi(states, prob,c,target,p)
+    meanSemiDevi(states, prob,c,target,p)
 
 implements the mean upper-semi variance risk measure of order ``p \\geq 1`` from a target ``t`` defined by
 ```math
-\\varrho_{c,t}^p(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y - t \\right)_+ \\rVert_p ,
+\\rho_{c,t}^p(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y - t \\right)_+ \\rVert_p ,
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
