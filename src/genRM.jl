@@ -46,7 +46,7 @@ distortion(states, prob,dist)
     
 implements the distortion risk measure    
 ```math
-\\rho(Y) := \\int_0^\\infty 1- dist(F_Y(x)) dx - \\int_{-\infty}^0 dist(F_Y(x) dx,
+\\rho(Y) := \\int_0^\\infty 1- dist(F_Y(x)) dx - \\int_{-\\infty}^0 dist(F_Y(x) dx,
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob` and ``dist(\\cdot)`` denotes the distortion function which is
 a right-continuous distribution function.
@@ -110,12 +110,14 @@ function GenCoherent(conds,states, prob)
 	
 end
 
+"""
+GenConvex(conds,states, prob)
 
-""" Convex risk measure
-    Calculates a general convex risk measure based on duality representations
-
-    conds must specify the feasible set of the convex conjugate
-    conjugate must be given via a "simple" expression
+implements a generic coherent risk measure based on the dual representation
+```math
+\\rho(Y) := \\sup \\left( \\mathbb{E} YZ - conjugate(Z) \\colon \\mathbb{E}Z=1, Z\\geq 0 \\right),
+```
+where ``conjugate(\\cdot)`` is a and convex function and conds describes the domain of ``conjugate(\\cdot)``.     
 """
 function GenConvex(conds,conjugate, states, prob)
     # based on the dual representation a set of conditions can be set and
