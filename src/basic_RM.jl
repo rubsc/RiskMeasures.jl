@@ -19,6 +19,11 @@ return(dot(states,prob))
 end
 
 
+function Expectation(d::Distribution)
+    return(mean(d))
+end
+
+
 
 """
     entropic(states, prob,theta)
@@ -46,6 +51,15 @@ function entropic(states, prob,theta::Float64)
     tmp = theta*w
 	
 	return(tmp) 
+end
+
+
+function entropic(d::Distribution,t::Float64)
+    if t <= 0
+        return(nothing)
+    end
+	tmp = mgf(d,1.0 ./t);
+    return ( t* log(tmp))
 end
 
 
