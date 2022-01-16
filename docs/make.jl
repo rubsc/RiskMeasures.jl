@@ -4,8 +4,9 @@ using riskMeasures
 push!(LOAD_PATH,"../src/")
 makedocs(sitename="riskMeasures.jl Documentation",
          pages = [
-            "Index" => "index.md",
-            "An other page" => "anotherPage.md",
+            "Home" => "index.md",
+            "Tutorials" => "tutorial.md",
+            "Function Library" => "library.md",
          ],
          format = Documenter.HTML(prettyurls = false)
 )

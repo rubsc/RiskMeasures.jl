@@ -1,4 +1,4 @@
-# The MyAwesomePackage Module
+# The riskMeasures Module
 
 
 
