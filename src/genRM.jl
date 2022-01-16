@@ -71,7 +71,7 @@ implements a generic coherent risk measure based on the dual representation
 ```
 where ``F(\\cdot)`` is a positively homegeneous and convex function and c is a constant.     
 """
-function GenCoherent(conds,states, prob)
+function GenCoherent(states, prob,conds)
     
 # For testing : 
  #states = [1 2 3]; prob = [0.3 0.4 0.3]
@@ -111,7 +111,7 @@ function GenCoherent(conds,states, prob)
 end
 
 """
-GenConvex(conds,states, prob)
+GenConvex(states, prob, conds, conjugate)
 
 implements a generic coherent risk measure based on the dual representation
 ```math
@@ -119,7 +119,7 @@ implements a generic coherent risk measure based on the dual representation
 ```
 where ``conjugate(\\cdot)`` is a and convex function and conds describes the domain of ``conjugate(\\cdot)``.     
 """
-function GenConvex(conds,conjugate, states, prob)
+function GenConvex(states, prob,conds,conjugate)
     # based on the dual representation a set of conditions can be set and
     # using IpOpt + JuMP the risk measure can be considered. 
 

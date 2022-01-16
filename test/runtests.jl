@@ -82,7 +82,7 @@ end
 
     o1 = :( (Y)^2 *p); o2 = :sqrt; conds = [o1 :+ o2]; 
     states = [1 2 3]; prob = [0.3 0.4 0.3];
-    @test GenCoherent(conds,states, prob)[1] ≈ 3.0 atol = 0.0001
+    @test GenCoherent(conds,states, prob,conds)[1] ≈ 3.0 atol = 0.0001
 
-    @test GenConvex(conds,x->x,states, prob) === nothing
+    @test GenConvex(states, prob,conds,x->x) === nothing
 end
