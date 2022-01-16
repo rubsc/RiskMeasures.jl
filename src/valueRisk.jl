@@ -68,7 +68,7 @@ EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x] \\left( \\beta +  \\log\\mathbb{E} e
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
 Here, the optimization is done using JuMP and Ipopt.  
 """
-function EVaR(beta,states, prob)
+function EVaR(states, prob,beta)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
