@@ -93,11 +93,14 @@ end
 
 
 
-""" Entropic risk measure 
-	as providing the dual variables
+"""
+entropic(states, prob,theta)
 
-	t* log Ee^(Y/t)  for t>0
-
+implements the entropic risk measure defined as
+```math
+rho_\\theta(Y) = theta \\cdot \\log \\mathbb{E} e^{\\frac{Y}{\\theta},
+```
+where ``\\theta`` is greater 0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
 function entropic(theta::Float64,states, prob)
     if theta <= 0
@@ -119,8 +122,14 @@ function entropic(theta::Float64,states, prob)
 end
 
 
-""" Mean Variance risk Measure
+"""
+meanVariance(states, prob,c)
 
+implements the mean Variance risk measure defined by
+```math
+rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\mathbb{E} \\left( Y- \\mathbb{E}Y)^2 \\right),
+```
+where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
 function meanVariance(c::Float64,states, prob)
     if c<0
@@ -137,10 +146,16 @@ function meanVariance(c::Float64,states, prob)
 end
 
 
-
-""" Mean Deviation risk Measure of order p
-
 """
+meanDeviation(states, prob,c,p)
+
+implements the mean deviation risk measure of order ``p\\geq 1`` defined by
+```math
+rho_\\theta(Y) = \\mathbb{E}Y + c \\cdot \\lVert \\left( Y- \\mathbb{E}Y)^2 \\rVert_p,
+```
+where ``c >0 and ``Y`` is the random variable defined by `states` and `prob`.
+"""
+
 function meanDeviation(c::Float64,p::Float64,states, prob)
     if c<0
         return(nothing)
