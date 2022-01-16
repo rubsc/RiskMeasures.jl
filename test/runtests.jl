@@ -28,7 +28,7 @@ end
     @test mSD(states,prob,0.0,2) == Expectation(states,prob)
     @test mSD([1 1], [0.0 0.0],0.0,2) == 1
     @test mSD(states,prob,1.0,2) ≈ 3.16419 atol = 0.001
-    @test mSD(states,prob,1.0,2) < mSD(1.0,3,states,prob)
+    @test mSD(states,prob,1.0,2) < mSD(states,prob,1.0,3)
 
     @test VaR(states,prob,0.0) == minimum(states)
     @test CTE2(states,prob,0.0) == Expectation(states,prob)
