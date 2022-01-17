@@ -28,8 +28,10 @@ hls  = 10 + d #hide layer size
 opt = Flux.ADAM(0.001)
 u0 = Flux.Chain(Dense(d,hls,relu),
                 Dense(hls,hls,relu),
+                Dense(hls,hls,relu),
                 Dense(hls,1))
 σᵀ∇u = Flux.Chain(Dense(d+1,hls,relu),
+                  Dense(hls,hls,relu),
                   Dense(hls,hls,relu),
                   Dense(hls,hls,relu),
                   Dense(hls,d))
