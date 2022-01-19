@@ -1,21 +1,11 @@
-# riskMeasures
+# riskMeasures.jl
 
 [![Build Status](https://github.com/rubsc/riskMeasures.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/rubsc/riskMeasures.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/rubsc/riskMeasures.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rubsc/riskMeasures.jl)
-[![](https://img.shields.io/badge/docs-stable-blue.svg)](https://rubsc.github.io/riskMeasures.jl/stable)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://rubsc.github.io/riskMeasures.jl/dev)
 
-A Julia package providing several well-known coherent risk measures for finite dimensional random variables.
+`riskMeasures.jl` is a Julia package providing several well-known coherent risk measures for finite dimensional random variables as well as some special distributions.
 
-
- ## ToDo:
- add tutorial on coherent/convex risk measures
-  --> how to construct sets
-  --> add visualization for sets
-  --> discuss properties of risk measures
-  --> add dynamic risk measures based BSDEs
- 
- 
 The following risk measures are provided either explicitly or via a primal representation.
 
 * Average Value at risk and Conditional Tail Expectation
@@ -34,8 +24,28 @@ The following general classes can also be used:
 * distortion risk measures
 * coherent risk measures based on dual representation
 * convex risk measures based on dual representation
+ 
+ *N/B* - _This package is actively developed and therefore new improvements and new features are continuously added._
 
-## Spectral risk measures and distortion risk measures
+
+## Installation
+
+To get the latest development version call:
+
+```julia
+] add https://github.com/rubsc/riskMeasures.jl
+```
+
+To use `riskMeasures.jl`, you need to have Julia >= v1.0. This package was developed in Julia 1.0.4, and has been tested for Julia >= v1.0 in Linux, OSX and Windows.
+
+## Documentation
+
+The STABLE documentation of riskMeasuresScenTrees.jl is available [here](https://rubsc.github.io/riskMeasures.jl/stable/). Here you can get the description of the various functions in the package and also different examples for the different features.
+
+## Example of Usage
+
+
+### Spectral risk measures and distortion risk measures
 
 Note that the class of spectral risk measures is equivalent with the class of distortion risk measures. They differe only in representation. 
 Spectral risk measures operate on quantile functions which are distorted by an increasing density. 
@@ -72,3 +82,10 @@ where F(Z) is a positively homegenouos and convex function and c is a parameter.
 If further capabilities are needed, the functions can be changed directly. 
 
 
+
+ ## ToDo:
+ add tutorial on coherent/convex risk measures
+  --> how to construct sets
+  --> add visualization for sets
+  --> discuss properties of risk measures
+  --> add dynamic risk measures based BSDEs
