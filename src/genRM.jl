@@ -52,8 +52,8 @@ function distortion(states, prob,dist)
 
     minState = minimum(states)-1; maxState = maximum(states)+1;
 
-    integral1, err1 = quadgk(x -> dist(cdf(d,x)), minState, 0, rtol=1e-8)
-    integral2, err2 = quadgk(x -> 1-dist(cdf(d,x)), 0, maxState, rtol=1e-8)
+    integral1, err1 = quadgk(x -> dist(cdf(d,x)), minState, 0, rtol=1e-10)
+    integral2, err2 = quadgk(x -> 1-dist(cdf(d,x)), 0, maxState, rtol=1e-10)
     return (integral2 - integral1)
 end
 
