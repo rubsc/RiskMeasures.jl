@@ -123,7 +123,7 @@ function EVaR(states, prob,beta)
 	else
 		if var >0
 			tOpt = sqrt.(2 *beta/var)
-			EV = Model(with_optimizer(Ipopt.Optimizer, print_level=0))
+			EV = Model(optimizer_with_attributes(Ipopt.Optimizer, "print_level" =>0))
 			function objective1(t)
 				return( (beta.+ log(dot(prob,exp.(t.*states))))/t)
 			end
