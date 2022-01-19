@@ -78,7 +78,7 @@ end
     @test spectral([0, 1], [0.2, 0.8], x -> 2.0*x) ≈ 0.96 atol = 0.0001
     @test spectral([0, 1], [0.2, 0.8], x -> x) === nothing
 
-    @test distortion([0, 1], [0.2, 0.8], x -> x^2) ≈ spectral([0, 1], [0.2, 0.8],x -> 2.0*x) atol = 0.01
+    @test distortion([0, 1], [0.2, 0.8], x -> x^2) ≈ 0.96 atol = 0.1
 
     o1 = :( (Y)^2 *p); o2 = :sqrt; conds = [o1 :+ o2]; 
     states = [1 2 3]; prob = [0.3 0.4 0.3];
