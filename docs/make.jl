@@ -5,7 +5,10 @@ push!(LOAD_PATH,"../src/")
 makedocs(sitename="riskMeasures.jl Documentation",
          pages = [
             "Home" => "index.md",
-            "Tutorials" => "tutorial.md",
+            "Tutorials" => Any["basic.md",
+				    "coherent.md",
+				    "convex.md"
+            ],
             "Function Library" => "library.md",
          ],
          format = Documenter.HTML(prettyurls = false)
