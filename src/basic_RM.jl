@@ -26,7 +26,7 @@ end
 
 
 """
-    entropic(states, prob,theta)
+    entropic(states, prob,theta::Float32)
 
 implements the entropic risk measure defined as
 ```math
@@ -34,7 +34,7 @@ implements the entropic risk measure defined as
 ```
 where ``\\theta`` is greater 0 and ``Y`` is the random variable defined by `states` and `prob`.
 """
-function entropic(states, prob,theta::Float64)
+function entropic(states, prob,theta::Float32)
     if theta <= 0
         return(nothing)
     end
@@ -54,7 +54,7 @@ function entropic(states, prob,theta::Float64)
 end
 
 
-function entropic(d::Distribution,t::Float64)
+function entropic(d::Distribution,t::Float32)
     if t <= 0
         return(nothing)
     end
@@ -67,7 +67,7 @@ end
 #Mean Semi-deviation
 #########################################################
 """ 
-    mSD(states,prob,beta,p)
+    mSD(states,prob,beta::Float32,p::Float32)
 
 implements the mean semi-deviation of order `p` which is a coherent risk measure defined by
 ```math
@@ -75,7 +75,7 @@ mSD_\\beta^p (Y) = \\mathbb{E} Y  + \\beta \\lvert \\left( Y - \\mathbb{E}Y \\ri
 ```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
-function mSD(states,prob,beta,p)
+function mSD(states,prob,beta::Float32,p::Float32)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
@@ -91,7 +91,7 @@ end
 
 
 """
-    meanVariance(states, prob,c)
+    meanVariance(states, prob,c::Float32)
 
 implements the mean Variance risk measure defined by
 ```math
@@ -99,7 +99,7 @@ implements the mean Variance risk measure defined by
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
-function meanVariance(states, prob,c::Float64)
+function meanVariance(states, prob,c::Float32)
     if c<0
         return(nothing)
     end
@@ -115,7 +115,7 @@ end
 
 
 """
-    meanDeviation(states, prob,c,p)
+    meanDeviation(states, prob,c::Float32,p::Float32)
 
 implements the mean deviation risk measure of order ``p\\geq 1`` defined by
 ```math
@@ -124,7 +124,7 @@ implements the mean deviation risk measure of order ``p\\geq 1`` defined by
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
 
-function meanDeviation(states, prob,c::Float64,p::Float64)
+function meanDeviation(states, prob,c::Float32,p::Float32)
     if c<0
         return(nothing)
     end
@@ -144,7 +144,7 @@ end
 
 
 """
-    meanSemiVariance(states, prob,c,t)
+    meanSemiVariance(states, prob,c::Float32,t::Float32)
 
 implements the mean upper-semi variance risk measure from a target ``t`` defined by
 ```math
@@ -152,7 +152,7 @@ implements the mean upper-semi variance risk measure from a target ``t`` defined
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
-function meanSemiVariance(states, prob,c::Float64,t::Float64)
+function meanSemiVariance(states, prob,c::Float32,t::Float32)
     if c<0
         return(nothing)
     end
@@ -169,7 +169,7 @@ end
 
 
 """
-    meanSemiDevi(states, prob,c,target,p)
+    meanSemiDevi(states, prob,c::Float32,target::Float32,p::Float32)
 
 implements the mean upper-semi variance risk measure of order ``p \\geq 1`` from a target ``t`` defined by
 ```math
@@ -177,7 +177,7 @@ implements the mean upper-semi variance risk measure of order ``p \\geq 1`` from
 ```
 where ``c >0`` and ``Y`` is the random variable defined by `states` and `prob`.
 """
-function meanSemiDevi(states, prob,c::Float64,target::Float64,p::Float64)
+function meanSemiDevi(states, prob,c::Float32,target::Float32,p::Float32)
     if c<0
         return(nothing)
     end

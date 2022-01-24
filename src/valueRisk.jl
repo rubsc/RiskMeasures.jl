@@ -1,6 +1,6 @@
 
 """ 
-    VaR(states,prob,alpha)
+    VaR(states,prob,alpha::Float32)
 
 implements the Value-at-Risk at level ``\\alpha`` defined by
 ```math
@@ -8,7 +8,7 @@ VaR_\\alpha (Y) = \\arg \\min_x \\left( x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha
 ```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
-function VaR(states,prob,alpha)
+function VaR(states,prob,alpha::Float32)
     # look for smallest x such that  P(-states <= x) >alpha , i.e.
     ind = sortperm(states[1:length(states)])
     states = states[ind]; probs = prob[ind];
@@ -27,7 +27,7 @@ function VaR(states,prob,alpha)
 end
 
 """ 
-    CTE2(states,prob,alpha)
+    CTE(states,prob,alpha::Float32)
 
 implements the Conditional Value-at-Risk at level ``\\alpha`` defined by
 ```math
@@ -35,7 +35,7 @@ CTE_\\alpha (Y) = VaR_\\alpha(Y) + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y- V
 ```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
-function CTE2(states,prob,alpha)
+function CTE(states,prob,alpha::Float32)
     tmp = VaR(states,prob,alpha)
     tmp2 = tmp + 1/(1-alpha) * dot(prob, max.(states .- tmp,0))
     return sum(tmp2)
@@ -54,7 +54,7 @@ EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x} \\left( \\beta +  \\log\\mathbb{E} e
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
 Here the optimization is done via the goldenSearch optimization routine implemented as part of this package. 
 """
-function EVaR2(states, prob,beta::Float64)
+function EVaR2(states, prob,beta::Float32)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
@@ -100,7 +100,7 @@ end
 
 
 """
-    EVaR(states,prob,beta)
+    EVaR(states,prob,beta::Float32)
 
 Solves the optimization problem associated with the primal formulation of the Entropic Value-at-Risk:
 
@@ -109,7 +109,7 @@ EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x} \\left( \\beta +  \\log\\mathbb{E} e
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`. Here, the optimization is done using JuMP and Ipopt.  
 """
-function EVaR(states, prob,beta)
+function EVaR(states, prob,beta::Float32)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
@@ -155,7 +155,7 @@ end
 
 
 """
-    AVaR(states,prob,alpha)
+    AVaR(states,prob,alpha::Float32)
 
 Solves the optimization problem associated with the primal formulation of the Average Value-at-Risk:
 
@@ -164,7 +164,7 @@ AVaR_\\alpha(Y) = \\min_{x\\in \\mathbb{R}} x + \\frac{1}{1-\\alpha} \\mathbb{E}
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
 """
-function AVaR(states,prob, alpha)
+function AVaR(states,prob, alpha::Float32)
     var2 = dot(prob, (states .- dot(prob,states)).^2);
      #First trivial case
     if alpha == 0.0
