@@ -1,4 +1,40 @@
 
+function VaR2(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
+    ind = sortperm(states[1:length(states)])
+    x = x[ind]; f = f[ind];
+    i = findfirst(p -> p≥α, cumsum(f))
+    if i === nothing
+        return x[end]
+    else
+        return x[i]
+    end
+end
+
+"""Conditional value-at-risk."""
+function CVaR(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
+    x_α = value_at_risk(x, f, α)
+    if iszero(α)
+        return x_α
+    else
+        tail = x .≤ x_α
+        return (sum(x[tail] .* f[tail]) - (sum(f[tail]) - α) * x_α) / α
+    end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """ 
     VaR(states,prob,alpha::Float32)
 
