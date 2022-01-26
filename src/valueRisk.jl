@@ -1,39 +1,4 @@
 
-function VaR2(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
-    ind = sortperm(states[1:length(states)])
-    x = x[ind]; f = f[ind];
-    i = findfirst(p -> p≥α, cumsum(f))
-    if i === nothing
-        return x[end]
-    else
-        return x[i]
-    end
-end
-
-"""Conditional value-at-risk."""
-function CVaR(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
-    x_α = value_at_risk(x, f, α)
-    if iszero(α)
-        return x_α
-    else
-        tail = x .≤ x_α
-        return (sum(x[tail] .* f[tail]) - (sum(f[tail]) - α) * x_α) / α
-    end
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 """ 
     VaR(states,prob,alpha::Float32)
@@ -44,23 +9,17 @@ VaR_\\alpha (Y) = \\arg \\min_x \\left( x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha
 ```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
-function VaR(states,prob,alpha::Float32)
-    # look for smallest x such that  P(-states <= x) >alpha , i.e.
-    ind = sortperm(states[1:length(states)])
-    states = states[ind]; probs = prob[ind];
-    probs2 = prob
-    for i=length(states):-1:2
-        if(states[i] == states[i-1])
-            probs2[i] = probs2[i] + probs2[i-1]
-        end
+function VaR2(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
+    ind = sortperm(x[1:length(x)])
+    x = x[ind]; f = f[ind];
+    i = findfirst(p -> p≥α, cumsum(f))
+    if i === nothing
+        return x[end]
+    else
+        return x[i]
     end
-
-    bla = unique(i -> states[i], length(states):-1:1)
-    probs3 = probs2[bla]
-    states2 = states[bla]
-    d = DiscreteNonParametric(states2, probs3)
-    return(quantile(d,alpha))
 end
+
 
 """ 
     CTE(states,prob,alpha::Float32)
@@ -71,11 +30,18 @@ CTE_\\alpha (Y) = VaR_\\alpha(Y) + \\frac{1}{1-\\alpha} \\mathbb{E} \\left( Y- V
 ```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
-function CTE(states,prob,alpha::Float32)
-    tmp = VaR(states,prob,alpha)
-    tmp2 = tmp + 1/(1-alpha) * dot(prob, max.(states .- tmp,0))
-    return sum(tmp2)
+function CTE(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
+    x = -x; α = 1-α;
+    x_α = VaR2(x, f, α)
+    if iszero(α)
+        return -x_α
+    else
+        tail = x .≤ x_α
+        result = (sum(x[tail] .* f[tail]) - (sum(f[tail]) - α) * x_α) / α
+        return -result
+    end
 end
+
 
 
 
