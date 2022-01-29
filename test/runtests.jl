@@ -53,7 +53,7 @@ end
 
 @testset "genRM.jl" begin
     # Write your tests here.
-    states = [1.0. 2.0, 3.0, 4.0]; prob = [0.2, 0.4, 0.2, 0.2]
+    states = [1.0, 2.0, 3.0, 4.0]; prob = [0.2, 0.4, 0.2, 0.2]
 
     
     @test entropic(states, prob,1.0f0) ≈ 2.91430 atol = 0.001
