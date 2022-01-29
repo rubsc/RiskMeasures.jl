@@ -1,8 +1,8 @@
 using Documenter
-using riskMeasures
+using RiskMeasures
 
 push!(LOAD_PATH,"../src/")
-makedocs(sitename="riskMeasures.jl Documentation",
+makedocs(sitename="RiskMeasures.jl Documentation",
          pages = [
             "Home" => "index.md",
             "Tutorials" => Any["basic.md",
@@ -17,6 +17,6 @@ makedocs(sitename="riskMeasures.jl Documentation",
 # See "Hosting Documentation" and deploydocs() in the Documenter manual
 # for more information.
 deploydocs(
-    repo = "github.com/rubsc/riskMeasures.jl.git",
+    repo = "github.com/rubsc/RiskMeasures.jl.git",
     devbranch = "main"
 )
