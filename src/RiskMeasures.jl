@@ -1,4 +1,4 @@
-module riskMeasures
+module RiskMeasures
 
 # Write your package code here.
 
