@@ -22,7 +22,7 @@ end
 @testset "basic_RM.jl" begin
     # Write your tests here.
     states = [1.0, 2.0, 3.0, 4.0]; prob = [0.2, 0.4, 0.2, 0.2]
-    @test Expectation([1.0, 2.0, 3.0, 4.0],0) == sum([1 2 3 4])/4
+    @test Expectation([1.0, 2.0, 3.0, 4.0],[0.0, 0.0, 0.0, 0.0]) == sum([1 2 3 4])/4
     @test Expectation(states,prob) == 0.2*1 + 0.4*2 + 0.2*3 + 0.2*4
 
     @test mSD(states,prob,0.0f0,2.0f0) == Expectation(states,prob)
