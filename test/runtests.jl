@@ -21,23 +21,23 @@ end
 
 @testset "basic_RM.jl" begin
     # Write your tests here.
-    states = [1.0 2.0 3.0 4.0]; prob = [0.2 0.4 0.2 0.2]
-    @test Expectation([1 2 3 4],0) == sum([1 2 3 4])/4
+    states = [1.0, 2.0, 3.0, 4.0]; prob = [0.2, 0.4, 0.2, 0.2]
+    @test Expectation([1.0, 2.0, 3.0, 4.0],0) == sum([1 2 3 4])/4
     @test Expectation(states,prob) == 0.2*1 + 0.4*2 + 0.2*3 + 0.2*4
 
     @test mSD(states,prob,0.0f0,2.0f0) == Expectation(states,prob)
-    @test mSD([1 1], [0.0 0.0],0.0f0,2.0f0) == 1
+    @test mSD([1.0, 1.0], [0.0, 0.0],0.0f0,2.0f0) == 1
     @test mSD(states,prob,1.0f0,2.0f0) ≈ 3.16419 atol = 0.001
     @test mSD(states,prob,1.0f0,2.0f0) < mSD(states,prob,1.0f0,3.0f0)
 
-    @test VaR(vec(states),vec(prob),0.0f0) == minimum(states)
-    @test CTE(vec(states),vec(prob),0.0f0) == Expectation(states,prob)
+    @test VaR(states,prob,0.0f0) == minimum(states)
+    @test CTE(states,prob,0.0f0) == Expectation(states,prob)
 end
 
 
 @testset "valueRisk.jl" begin
     # Write your tests here.
-    states = [1.0 2.0 3.0 4.0]; prob = [0.2 0.4 0.2 0.2]
+    states = [1.0, 2.0, 3.0, 4.0]; prob = [0.2, 0.4, 0.2, 0.2]
     
     @test EVaR2(states, prob,0.0f0)[1] == Expectation(states,prob)
     @test EVaR2(states, prob,0.5f0)[1] ≈ 3.413183 atol = 0.001
