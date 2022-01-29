@@ -30,7 +30,7 @@ end
     @test mSD(states,prob,1.0f0,2.0f0) ≈ 3.16419 atol = 0.001
     @test mSD(states,prob,1.0f0,2.0f0) < mSD(states,prob,1.0f0,3.0f0)
 
-    @test VaR(states,prob,0.0f0) == minimum(states)
+    @test VaR(vec(states),vec(prob),0.0f0) == minimum(states)
     @test CTE(vec(states),vec(prob),0.0f0) == Expectation(states,prob)
 end
 
