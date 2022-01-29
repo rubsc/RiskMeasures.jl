@@ -9,7 +9,7 @@ VaR_\\alpha (Y) = \\arg \\min_x \\left( x\\in \\mathbb{R} : F_Y(x) \\geq \\alpha
 ```
 for the random variable ``Y`` defined by `states` and `prob`.
 """
-function VaR2(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
+function VaR(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
     ind = sortperm(x[1:length(x)])
     x = x[ind]; f = f[ind];
     i = findfirst(p -> p≥α, cumsum(f))
@@ -32,7 +32,7 @@ for the random variable ``Y`` defined by `states` and `prob`.
 """
 function CTE(x::Vector{Float64}, f::Vector{Float64}, α::Float32)
     x = -x; α = 1-α;
-    x_α = VaR2(x, f, α)
+    x_α = VaR(x, f, α)
     if iszero(α)
         return -x_α
     else
