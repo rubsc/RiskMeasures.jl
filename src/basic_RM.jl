@@ -12,7 +12,7 @@ the probability measure ``Q`` given by `prob`:
 ```
 """
 function Expectation(states::Vector{Float64},prob::Vector{Float64})
-if prob == 0
+if sum(prob) == 0.0
     prob = ones(length(states))./ length(states)
 end
 return(dot(states,prob))
