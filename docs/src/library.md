@@ -1,16 +1,16 @@
-# The riskMeasures Module
+# The RiskMeasures Module
 
 
 
 ## Module Index
 
 ```@index
-Modules = [riskMeasures]
+Modules = [RiskMeasures]
 Order   = [:constant, :type, :function, :macro]
 ```
 ## Detailed API
 
 ```@autodocs
-Modules = [riskMeasures]
+Modules = [RiskMeasures]
 Order   = [:constant, :type, :function, :macro]
 ```
