@@ -174,7 +174,7 @@ function AVaR(states::Vector{Float64},prob::Vector{Float64}, alpha::Float32)
   #Now set up optimization problem using goldenSearch
     else
        tOpt = sqrt.(2 *alpha/var2)
-       EV = Model(with_optimizer(Ipopt.Optimizer, print_level=0))
+       EV = Model(optimizer_with_attributes(Ipopt.Optimizer, "print_level" =>0))
 		function objective1(t)
 			return( t + 1/(1-alpha) * dot(prob, max.(states .- t,0)) )
 		end
