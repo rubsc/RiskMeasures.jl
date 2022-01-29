@@ -1,11 +1,11 @@
 ```@meta
-CurrentModule = riskMeasures
+CurrentModule = RiskMeasures
 ```
 
-# riskMeasures.jl
+# RiskMeasures.jl
 
-We present `riskMeasures.jl` package for evaluating various risk measures on samples as well as distribution objects from `Distribution.jl`. The main focus of this package is on static coherent risk measures but some other statistics are provided for completeness. 
-The companion package `dynamicRisk.jl` builds on this package to implement (discrete time) dynamic risk measures for general trees and lattices as well as dynamic risk measures in continuous time for SDEs and certain Lévy processes.
+We present `RiskMeasures.jl` package for evaluating various risk measures on samples as well as distribution objects from `Distribution.jl`. The main focus of this package is on static coherent risk measures but some other statistics are provided for completeness. 
+The companion package `DynamicRisk.jl` builds on this package to implement (discrete time) dynamic risk measures for general trees and lattices as well as dynamic risk measures in continuous time for SDEs and certain Lévy processes.
 
 ## Main features of the package
 
@@ -17,10 +17,10 @@ To understand the general template it is recommended to have some deeper underst
 
 ## Installation
 
-The package `riskMeasures.jl` can be installed in Julia REPL as follows:
+The package `RiskMeasures.jl` can be installed in Julia REPL as follows:
 
 ```julia
 julia> using Pkg
-julia> Pkg.add("https://github.com/rubsc/riskMeasures.jl")
-julia> using riskMeasures
+julia> Pkg.add("https://github.com/rubsc/RiskMeasures.jl")
+julia> using RiskMeasures
 ```
