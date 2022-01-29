@@ -56,7 +56,7 @@ EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x} \\left( \\beta +  \\log\\mathbb{E} e
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
 Here the optimization is done via the goldenSearch optimization routine implemented as part of this package. 
 """
-function EVaR2(states, prob,beta::Float32)
+function EVaR2(states::Vector{Float64}, prob::Vector{Float64},beta::Float32)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
@@ -111,7 +111,7 @@ EVaR_\\alpha(Y) = \\min_{x >0} \\frac{1}{x} \\left( \\beta +  \\log\\mathbb{E} e
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`. Here, the optimization is done using JuMP and Ipopt.  
 """
-function EVaR(states, prob,beta::Float32)
+function EVaR(states::Vector{Float64}, prob::Vector{Float64},beta::Float32)
 	if sum(prob) == 0
 		prob = ones(length(states))./ length(states)
 	end
@@ -166,7 +166,7 @@ AVaR_\\alpha(Y) = \\min_{x\\in \\mathbb{R}} x + \\frac{1}{1-\\alpha} \\mathbb{E}
 ```
 where ``Y`` is the discrete random variable defined by `states` and `prob`.
 """
-function AVaR(states,prob, alpha::Float32)
+function AVaR(states::Vector{Float64},prob::Vector{Float64}, alpha::Float32)
     var2 = dot(prob, (states .- dot(prob,states)).^2);
      #First trivial case
     if alpha == 0.0
