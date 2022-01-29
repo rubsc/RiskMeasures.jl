@@ -1,5 +1,5 @@
 ```@meta
-CurrentModule = riskMeasures
+CurrentModule = RiskMeasures
 ```
 
 # Coherent risk measures
