@@ -1,4 +1,4 @@
-using riskMeasures
+using RiskMeasures
 using Test
 
 @testset "helper.jl" begin
