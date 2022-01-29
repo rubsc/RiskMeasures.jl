@@ -1,10 +1,10 @@
-# riskMeasures.jl
+# RiskMeasures.jl
 
-[![Build Status](https://github.com/rubsc/riskMeasures.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/rubsc/riskMeasures.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![Coverage](https://codecov.io/gh/rubsc/riskMeasures.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rubsc/riskMeasures.jl)
-[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://rubsc.github.io/riskMeasures.jl/dev)
+[![Build Status](https://github.com/rubsc/RiskMeasures.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/rubsc/RiskMeasures.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Coverage](https://codecov.io/gh/rubsc/RiskMeasures.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/rubsc/RiskMeasures.jl)
+[![](https://img.shields.io/badge/docs-dev-blue.svg)](https://rubsc.github.io/RiskMeasures.jl/dev)
 
-`riskMeasures.jl` is a Julia package providing several well-known coherent risk measures for finite dimensional random variables as well as some special distributions.
+`RiskMeasures.jl` is a Julia package providing several well-known coherent risk measures for finite dimensional random variables as well as some special distributions.
 
 The following risk measures are provided either explicitly or via a primal representation.
 
@@ -33,14 +33,14 @@ The following general classes can also be used:
 To get the latest development version call:
 
 ```julia
-] add https://github.com/rubsc/riskMeasures.jl
+] add https://github.com/rubsc/RiskMeasures.jl
 ```
 
 To use `riskMeasures.jl`, you need to have Julia >= v1.0. This package was developed in Julia 1.0.4, and has been tested for Julia >= v1.0 in Linux, OSX and Windows.
 
 ## Documentation
 
-The STABLE documentation of riskMeasuresScenTrees.jl is available [here](https://rubsc.github.io/riskMeasures.jl/stable/). Here you can get the description of the various functions in the package and also different examples for the different features.
+The STABLE documentation of RiskMeasures.jl is available [here](https://rubsc.github.io/RiskMeasures.jl/stable/). Here you can get the description of the various functions in the package and also different examples for the different features.
 
 ## Example of Usage
 
